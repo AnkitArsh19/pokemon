@@ -69,7 +69,6 @@ export default function MobileControls() {
 
   const handleBButton = (isDown) => {
     if (isDown) {
-      EventBus.emit('showMenu', { section: 'main' });
       simulateKey('Escape', true);
     } else {
       simulateKey('Escape', false);
@@ -94,26 +93,26 @@ export default function MobileControls() {
             <div className="dpad">
               <button
                 className="dpad-btn dpad-up"
-                onTouchStart={(e) => { e.preventDefault(); startDirection('up'); }}
+                onTouchStart={(e) => { startDirection('up'); }}
                 onTouchEnd={stopDirection}
                 aria-label="Up"
               >▲</button>
               <button
                 className="dpad-btn dpad-left"
-                onTouchStart={(e) => { e.preventDefault(); startDirection('left'); }}
+                onTouchStart={(e) => { startDirection('left'); }}
                 onTouchEnd={stopDirection}
                 aria-label="Left"
               >◀</button>
               <div className="dpad-center" />
               <button
                 className="dpad-btn dpad-right"
-                onTouchStart={(e) => { e.preventDefault(); startDirection('right'); }}
+                onTouchStart={(e) => { startDirection('right'); }}
                 onTouchEnd={stopDirection}
                 aria-label="Right"
               >▶</button>
               <button
                 className="dpad-btn dpad-down"
-                onTouchStart={(e) => { e.preventDefault(); startDirection('down'); }}
+                onTouchStart={(e) => { startDirection('down'); }}
                 onTouchEnd={stopDirection}
                 aria-label="Down"
               >▼</button>
@@ -123,14 +122,14 @@ export default function MobileControls() {
           <div className="ab-container">
             <button
               className="ab-btn btn-a"
-              onTouchStart={(e) => { e.preventDefault(); handleAButton(true); }}
-              onTouchEnd={(e) => { e.preventDefault(); handleAButton(false); }}
+              onTouchStart={(e) => { handleAButton(true); }}
+              onTouchEnd={(e) => { handleAButton(false); }}
               aria-label="A - Interact"
             >A</button>
             <button
               className="ab-btn btn-b"
-              onTouchStart={(e) => { e.preventDefault(); handleBButton(true); }}
-              onTouchEnd={(e) => { e.preventDefault(); handleBButton(false); }}
+              onTouchStart={(e) => { handleBButton(true); }}
+              onTouchEnd={(e) => { handleBButton(false); }}
               aria-label="B - Menu"
             >B</button>
           </div>

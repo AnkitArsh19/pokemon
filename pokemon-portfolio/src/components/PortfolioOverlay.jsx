@@ -189,10 +189,10 @@ export default function PortfolioOverlay() {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') {
         handleNext();
-      } else if (e.key === 'ArrowLeft') {
+      } else if (e.key === 'ArrowLeft' || e.key === 'Escape' || e.key === 'Backspace') {
         handleBack();
-      } else if (e.key === 'Escape' || e.key === 'Backspace' || e.key === 'x' || e.key === 'z') {
-        if (e.key === 'Escape' || e.key === 'Backspace' || e.key === 'x') {
+      } else if (e.key === 'x' || e.key === 'z') {
+        if (e.key === 'x') {
           handleClose();
         }
       }

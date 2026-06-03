@@ -43,6 +43,14 @@
     }
 }
 
+/* Apply 3:2 ratio constraints for landscape mobile devices (ultra-wide screens) */
+@media (orientation: landscape) and (max-height: 600px) {
+    .game-app {
+        max-height: 100vh;
+        max-width: calc(100vh * 3 / 2);
+    }
+}
+
 #game-container {
     position: absolute;
     top: 50%;
@@ -61,8 +69,19 @@
     image-rendering: crisp-edges;
 }
 
-.ui-layer > * {
-    pointer-events: auto;
+:root {
+    --ui-scale: 1;
+}
+
+.dialogue-box,
+.menu-panel,
+.main-menu-panel,
+.pokemon-select-panel,
+.starter-dialogue-box,
+.level-up-panel,
+.encounter-content {
+    transform: scale(var(--ui-scale));
+    transform-origin: center center;
 }
 
 /* ═══════════════════════════════════════════════
@@ -70,7 +89,7 @@
    ═══════════════════════════════════════════════ */
 
 .dialogue-overlay {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -133,7 +152,7 @@
    ═══════════════════════════════════════════════ */
 
 .menu-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -779,7 +798,7 @@
    ═══════════════════════════════════════════════ */
 
 .main-menu-panel {
-    position: fixed;
+    position: absolute;
     top: 12px;
     right: 12px;
     background: #e8e0d0;
@@ -789,9 +808,22 @@
         inset 2px 2px 0 #f8f0e0,
         inset -2px -2px 0 #c8c0b0,
         0 8px 24px rgba(0, 0, 0, 0.6);
-    overflow: hidden;
-    z-index: 100;
+    z-index: 1000;
+    max-height: calc(100% - 24px);
+    overflow-y: auto;
+    overflow-x: hidden;
     animation: slide-in-right 0.15s ease-out;
+}
+
+/* Hide floating menu button when any overlay is active */
+.game-app:has(.starter-overlay) .menu-fab,
+.game-app:has(.menu-overlay) .menu-fab,
+.game-app:has(.frb-root) .menu-fab,
+.game-app:has(.portfolio-overlay) .menu-fab,
+.game-app:has(.dialogue-overlay) .menu-fab,
+.game-app:has(.levelup-overlay) .menu-fab,
+.game-app:has(.evolution-overlay) .menu-fab {
+    display: none !important;
 }
 
 @keyframes slide-in-right {
@@ -864,7 +896,7 @@
    ═══════════════════════════════════════════════ */
 
 .starter-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -887,10 +919,10 @@
 }
 
 .starter-cinematic {
-    position: fixed;
+    position: absolute;
     inset: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     background: #000;
     cursor: pointer;
@@ -1205,7 +1237,7 @@
 .start-screen-flame {
     position: absolute;
     bottom: -18%;
-    width: clamp(22px, 4.7cqw, 54px);
+    width: clamp(10px, 4.7cqw, 54px);
     height: auto;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
@@ -1237,7 +1269,7 @@
     top: 0;
     display: flex;
     align-items: flex-start;
-    font-size: clamp(58px, 9.8cqw, 118px);
+    font-size: clamp(20px, 9.8cqw, 118px);
     letter-spacing: 0;
     line-height: 0.92;
     white-space: nowrap;
@@ -2418,7 +2450,7 @@
    ═══════════════════════════════════════════════ */
 
 .levelup-overlay {
-    position: fixed;
+    position: absolute;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -2479,7 +2511,7 @@
 
 /* ── Evolution overlay ── */
 .evolution-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -3091,7 +3123,7 @@
 
 /* Root overlay — full-screen dim backdrop ─────────────────────────── */
 .frb-root {
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: 200;
     display: flex;
@@ -3302,6 +3334,13 @@
     align-items: center;
     justify-content: flex-end;
     z-index: 3;
+}
+
+@media (orientation: portrait) {
+    .frb-player-area {
+        bottom: 35%;
+        /* Shift up more in mobile view so player pokemon is visible */
+    }
 }
 
 /* Trainer sprite (background-image set inline from JS) */
@@ -4007,9 +4046,12 @@
 
 /* ── Portfolio Overlay ── */
 .portfolio-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
     z-index: 10000;
     display: flex;
     justify-content: center;
@@ -4029,7 +4071,8 @@
 
 .portfolio-bg {
     position: absolute;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -4110,6 +4153,375 @@
     border: 2px solid white;
     transform: translate(30%, -30%);
 }
+
 .close-btn:hover {
     background: #c0392b;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — Portrait mode
+   All overlays must fit inside the constrained .game-app container.
+   Desktop is NOT affected by these rules.
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (orientation: portrait) {
+
+    .cinematic-frame,
+    .cinematic-battle-wrap,
+    .cinematic-rise-wrap,
+    .cinematic-battle-final,
+    .cinematic-start-screen {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .cinematic-battle-final {
+        --battle-character-scale: 0.5;
+    }
+
+    .cinematic-gengar {
+        width: min(18cqw, 100px) !important;
+    }
+
+    .cinematic-nidorino {
+        width: min(16cqw, 90px) !important;
+    }
+
+    .cinematic-rise-gengar {
+        width: min(20cqw, 110px) !important;
+    }
+
+    /* ── Main Menu sidebar — compact items ── */
+    .main-menu-panel {
+        max-height: calc(100% - 24px);
+    }
+
+    .main-menu-item {
+        font-size: 7px;
+        padding: 7px 10px;
+        gap: 6px;
+    }
+
+    .mm-icon-img {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* ── Menu panels — fit in game-app ── */
+    .menu-panel,
+    .menu-panel.wide {
+        max-height: calc(100% - 16px) !important;
+        max-width: calc(100% - 16px) !important;
+        width: 95% !important;
+    }
+
+    /* ── Pokémon Selection View — scale to container ── */
+    .psv-root {
+        width: calc(100% - 16px);
+        max-width: 100%;
+        margin: 4px;
+        padding: 6px;
+    }
+
+    .psv-top-banner {
+        padding: 8px;
+    }
+
+    .psv-top-right {
+        padding-left: 40px;
+        padding-top: 4px;
+    }
+
+    .psv-banner-title {
+        font-size: 8px;
+        margin-bottom: 4px;
+    }
+
+    .psv-banner-summary {
+        font-size: 6px;
+        line-height: 1.4;
+    }
+
+    .psv-banner-level {
+        font-size: 8px;
+        margin-bottom: 4px;
+    }
+
+    .psv-type-badge {
+        font-size: 6px;
+        padding: 2px 4px;
+    }
+
+    .psv-tag-party,
+    .psv-tag-pc {
+        font-size: 6px;
+        padding: 3px 6px;
+    }
+
+    .psv-center-stage {
+        gap: 8px;
+    }
+
+    .psv-sprite-wrap {
+        width: 100px;
+        height: 100px;
+    }
+
+    .psv-sprite {
+        width: 100px;
+        height: 100px;
+    }
+
+    .psv-arrow {
+        font-size: 18px;
+        padding: 4px;
+    }
+
+    .psv-counter {
+        font-size: 7px;
+        padding: 2px 6px;
+    }
+
+    .psv-bottom-menu {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 5/2;
+        margin-bottom: -4px;
+        padding: 4px;
+    }
+
+    .psv-menu-btn {
+        font-size: 7px;
+        padding-left: 8px;
+    }
+
+    .psv-close {
+        width: 24px;
+        height: 24px;
+        top: -12px;
+        right: -12px;
+        font-size: 12px;
+    }
+
+    /* ── Pokédex grid — 3 cols, ultra-compact for small game area ── */
+    .pokedex-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        padding: 3px;
+    }
+
+    .pokedex-entry {
+        aspect-ratio: 1 / 1;
+        padding: 4px;
+        gap: 2px;
+    }
+
+    .pokedex-sprite {
+        width: 36px;
+        height: 36px;
+    }
+
+    .pokedex-id {
+        font-size: 5px;
+        margin-bottom: 0;
+    }
+
+    .pokedex-name {
+        font-size: 4px;
+    }
+
+    .pokedex-header {
+        padding: 4px 8px;
+    }
+
+    .pokedex-header h3 {
+        font-size: 7px;
+    }
+
+    .pokedex-count {
+        font-size: 5px;
+    }
+
+    .pokedex-owned-badge {
+        font-size: 5px;
+        padding: 1px 2px;
+    }
+
+    /* ── Portfolio overlay — fit in game-app ── */
+    .portfolio-container {
+        width: 95%;
+        max-width: 100%;
+    }
+
+    .portfolio-content h2 {
+        font-size: 8px;
+        margin-bottom: 6px;
+    }
+
+    .portfolio-content p {
+        font-size: 6px;
+    }
+
+    .page-indicator {
+        font-size: 6px;
+    }
+
+    .close-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — Landscape mode (short screens)
+   Same constraints but the game area is wider and shorter.
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (orientation: landscape) and (max-height: 600px) {
+
+    /* ── Intro Cinematic — constrain to container ── */
+    .cinematic-frame,
+    .cinematic-battle-wrap,
+    .cinematic-rise-wrap,
+    .cinematic-battle-final,
+    .cinematic-start-screen {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .cinematic-gengar {
+        width: min(28cqw, 160px);
+    }
+
+    .cinematic-nidorino {
+        width: min(24cqw, 140px);
+    }
+
+    .cinematic-rise-gengar {
+        width: min(30cqw, 170px);
+    }
+
+    /* ── Main Menu sidebar — compact ── */
+    .main-menu-panel {
+        max-height: calc(100% - 16px);
+    }
+
+    .main-menu-item {
+        font-size: 7px;
+        padding: 5px 10px;
+        gap: 5px;
+    }
+
+    .mm-icon-img {
+        width: 12px;
+        height: 12px;
+    }
+
+    /* ── Menu panels — fit in game-app ── */
+    .menu-panel {
+        max-height: calc(100% - 16px);
+        max-width: calc(100% - 16px);
+    }
+
+    /* ── Pokémon Selection View — scale to container ── */
+    .psv-root {
+        width: calc(100% - 16px);
+        max-width: 100%;
+        margin: 4px;
+        padding: 6px;
+    }
+
+    .psv-top-banner {
+        padding: 6px;
+    }
+
+    .psv-top-right {
+        padding-left: 60px;
+        padding-top: 2px;
+    }
+
+    .psv-banner-title {
+        font-size: 9px;
+        margin-bottom: 3px;
+    }
+
+    .psv-banner-summary {
+        font-size: 6px;
+    }
+
+    .psv-banner-level {
+        font-size: 9px;
+    }
+
+    .psv-center-stage {
+        gap: 12px;
+    }
+
+    .psv-sprite-wrap {
+        width: 120px;
+        height: 120px;
+    }
+
+    .psv-sprite {
+        width: 120px;
+        height: 120px;
+    }
+
+    .psv-arrow {
+        font-size: 20px;
+        padding: 6px;
+    }
+
+    .psv-bottom-menu {
+        width: 80%;
+        height: auto;
+        aspect-ratio: 5/2;
+        margin-bottom: -4px;
+    }
+
+    .psv-menu-btn {
+        font-size: 8px;
+    }
+
+    .psv-close {
+        width: 24px;
+        height: 24px;
+        top: -12px;
+        right: -12px;
+    }
+
+    /* ── Pokédex grid — compact ── */
+    .pokedex-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3px;
+        padding: 4px;
+    }
+
+    .pokedex-sprite {
+        width: 44px;
+        height: 44px;
+    }
+
+    .pokedex-id {
+        font-size: 6px;
+    }
+
+    .pokedex-name {
+        font-size: 6px;
+    }
+
+    /* ── Portfolio ── */
+    .portfolio-container {
+        width: 90%;
+        max-width: 100%;
+    }
+
+    .close-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
 }

@@ -144,7 +144,9 @@ export default class WorldScene extends Phaser.Scene {
     });
 
     this.input.keyboard.on("keydown-ESC", () => {
-      EventBus.emit("showMenu", { section: "main" });
+      if (!this.isInputBlocked) {
+        EventBus.emit("showMenu", { section: "main" });
+      }
     });
 
     // ── EasyStar pathfinding for click-to-move ──
@@ -213,6 +215,9 @@ export default class WorldScene extends Phaser.Scene {
 
     // Notify React that the scene is ready
     EventBus.emit('current-scene-ready', this);
+
+    // Register cleanup
+    this.events.once('shutdown', this.shutdown, this);
   }
 
   update(time, delta) {

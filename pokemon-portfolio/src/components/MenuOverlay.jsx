@@ -122,7 +122,7 @@ export default function MenuOverlay() {
 
     return (
       <div className="menu-overlay" onClick={close}>
-        <div className="menu-panel custom-scrollbar" onClick={e => e.stopPropagation()} style={{ width: '380px', maxHeight: '80vh', overflowY: 'auto', padding: '16px' }}>
+        <div className="menu-panel custom-scrollbar" onClick={e => e.stopPropagation()} style={{ width: 'min(380px, 95%)', maxHeight: 'calc(100% - 24px)', overflowY: 'auto', padding: '16px' }}>
           <div className="menu-header" style={{ marginBottom: '16px' }}>
             <span className="menu-title">
               <img src="./assets/icons/carte_magnetique.png" className="mm-icon-img" alt="" /> HOUSES
@@ -139,7 +139,7 @@ export default function MenuOverlay() {
                   display: 'flex', alignItems: 'center', justifyContent: 'flex-start',
                   background: '#fff', border: '2px solid #506860', borderRadius: '6px',
                   padding: '12px 16px', cursor: 'pointer', fontFamily: '"Press Start 2P", monospace',
-                  fontSize: '10px', color: '#404040', transition: 'background 0.2s', width: '100%',
+                  fontSize: 'clamp(7px, 2vw, 10px)', color: '#404040', transition: 'background 0.2s', width: '100%',
                   textAlign: 'left'
                 }}
                 onMouseOver={(e) => e.currentTarget.style.background = '#e8f0e8'}
@@ -160,7 +160,7 @@ export default function MenuOverlay() {
     
     return (
       <div className="menu-overlay" onClick={close}>
-        <div className="menu-panel custom-scrollbar" onClick={e => e.stopPropagation()} style={{ width: '380px', maxHeight: '80vh', overflowY: 'auto', padding: '16px' }}>
+        <div className="menu-panel custom-scrollbar" onClick={e => e.stopPropagation()} style={{ width: 'min(380px, 95%)', maxHeight: 'calc(100% - 24px)', overflowY: 'auto', padding: '16px' }}>
           <div className="menu-header" style={{ marginBottom: '16px' }}>
             <span className="menu-title">
               <img src="./assets/icons/cherch_objet.png" className="mm-icon-img" alt="" /> GAME TIPS
@@ -208,7 +208,7 @@ export default function MenuOverlay() {
 
     return (
       <div className="menu-overlay" onClick={close}>
-        <div className="menu-panel custom-scrollbar" onClick={e => e.stopPropagation()} style={{ width: '380px', maxHeight: '80vh', overflowY: 'auto', padding: '16px' }}>
+        <div className="menu-panel custom-scrollbar" onClick={e => e.stopPropagation()} style={{ width: 'min(380px, 95%)', maxHeight: 'calc(100% - 24px)', overflowY: 'auto', padding: '16px' }}>
           <div className="menu-header" style={{ marginBottom: '16px' }}>
             <span className="menu-title">
               <img src="./assets/icons/carte_magnetique.png" className="mm-icon-img" alt="" /> CONTACT
@@ -313,7 +313,7 @@ function ControlsMenu() {
       <div className="menu-subtitle">
         <img src="./assets/icons/musique_gb.png" className="mm-icon-img" alt="" /> CONTROLS
       </div>
-      <div className="controls-grid" style={{ padding: '10px', background: '#fff', border: '2px solid #506860', borderRadius: '8px', margin: '10px 0', fontSize: '10px' }}>
+      <div className="controls-grid" style={{ padding: '10px', background: '#fff', border: '2px solid #506860', borderRadius: '8px', margin: '10px 0', fontSize: 'clamp(7px, 2vw, 10px)' }}>
         {controls.map((c, i) => (
           <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 4px', borderBottom: i < controls.length - 1 ? '1px solid #e0e0e0' : 'none' }}>
             <span style={{ fontWeight: 'bold', color: '#d04848' }}>{c.key}</span>
@@ -324,7 +324,7 @@ function ControlsMenu() {
       <div className="menu-subtitle" style={{marginTop: '16px'}}>
         <img src="./assets/icons/lumiere_argile.png" className="mm-icon-img" alt="" /> TIPS
       </div>
-      <div className="controls-tips" style={{ padding: '10px', background: '#fff', border: '2px solid #506860', borderRadius: '8px', margin: '10px 0', fontSize: '10px' }}>
+      <div className="controls-tips" style={{ padding: '10px', background: '#fff', border: '2px solid #506860', borderRadius: '8px', margin: '10px 0', fontSize: 'clamp(7px, 2vw, 10px)' }}>
         <ul style={{ margin: 0, paddingLeft: '20px', color: '#404040', lineHeight: '1.8' }}>
           <li>Walk in tall grass to encounter wild POKéMON.</li>
           <li>Talk to Nurse Joy to heal your party.</li>
@@ -350,7 +350,7 @@ function OptionsMenu() {
       <div className="menu-subtitle">
         <img src="./assets/icons/cherch_objet.png" className="mm-icon-img" alt="" /> OPTIONS
       </div>
-      <div style={{ padding: '20px 10px', background: '#fff', border: '2px solid #506860', borderRadius: '8px', margin: '10px 0', fontSize: '10px' }}>
+      <div style={{ padding: '20px 10px', background: '#fff', border: '2px solid #506860', borderRadius: '8px', margin: '10px 0', fontSize: 'clamp(7px, 2vw, 10px)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px' }}>
           <span style={{ color: '#404040', fontWeight: 'bold' }}>Reset Save Data</span>
           <button onClick={resetSave} style={{

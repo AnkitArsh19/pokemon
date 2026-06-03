@@ -134,6 +134,9 @@ export default class InteriorScene extends Phaser.Scene {
         this.triggerPortfolioOverlay(true);
       });
     });
+
+    // Register cleanup
+    this.events.once('shutdown', this.shutdown, this);
   }
 
   update(time, delta) {
@@ -190,10 +193,14 @@ export default class InteriorScene extends Phaser.Scene {
     this.player.setVelocity(0);
     this.player.anims.stop();
     
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isTouch = isMobileDevice && ('ontouchstart' in window) && window.innerWidth < 1024;
+    const promptText = isTouch ? "Press A button to read it." : "Press ENTER to read it.";
+
     // Show a dialogue box before opening the UI
     EventBus.emit('showDialogue', {
       dialogueKey: 'portfolio_intro_' + this.houseId,
-      customText: ["Looks like there is some information here...", "Press ENTER to read it."]
+      customText: ["Looks like there is some information here...", promptText]
     });
   }
 

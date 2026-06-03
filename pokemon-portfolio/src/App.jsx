@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import PhaserGame from './components/PhaserGame';
 import DialogueBox from './components/DialogueBox';
 import MenuOverlay from './components/MenuOverlay';
@@ -52,29 +52,15 @@ export default function App() {
         {/* Phaser game canvas */}
         {gameStarted && <PhaserGame />}
 
-        {/* UI Layer - Scales down collectively to fit mobile screens exactly like desktop */}
-        <div 
-          className="ui-layer" 
-          style={{ 
-            position: 'absolute', 
-            top: '50%', left: '50%', 
-            width: `${BASE_WIDTH}px`, height: `${BASE_HEIGHT}px`,
-            transform: `translate(-50%, -50%) scale(${uiScale})`, 
-            transformOrigin: 'center center',
-            pointerEvents: 'none',
-            zIndex: 10
-          }}
-        >
-          {/* Game feature overlays */}
-          <StarterSelect />
-          <LevelUpOverlay />
-          <EncounterOverlay />
-          <PortfolioOverlay />
+        {/* Game feature overlays */}
+        <StarterSelect />
+        <LevelUpOverlay />
+        <EncounterOverlay />
+        <PortfolioOverlay />
 
-          {/* React overlays (positioned above canvas via z-index) */}
-          <DialogueBox />
-          <MenuOverlay />
-        </div>
+        {/* React overlays (positioned above canvas via z-index) */}
+        <DialogueBox />
+        <MenuOverlay />
         
         {/* Mobile controls outside the scaling layer so they remain large and tappable */}
         <MobileControls />

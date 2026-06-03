@@ -128,17 +128,17 @@ export default function StarterSelect() {
   useEffect(() => {
     const unsub = EventBus.on('playIntro', () => {
       setVisible(true);
-      setPhase('loading');
-      setLoadingPercentage(0);
+      setPhase('cinematic');
       setCinematicStep('frames');
       setCinematicFrame(0);
+      audioManager.play('opening', true);
       EventBus.emit('blockInput');
     });
     return () => unsub();
   }, []);
 
   useEffect(() => {
-    if (!gameState.hasSelectedStarter) {
+    if (phase === 'loading') {
       EventBus.emit('blockInput');
 
       const requiredAssets = [
@@ -174,13 +174,12 @@ export default function StarterSelect() {
         img.src = src;
       });
     }
-  }, []);
+  }, [phase]);
 
   useEffect(() => {
     if (!visible || phase !== 'cinematic') return;
 
     if (cinematicStep === 'frames') {
-      audioManager.play('opening', true);
       const timer = setInterval(() => {
         setCinematicFrame((prev) => {
           const next = prev + 1;
@@ -296,6 +295,9 @@ export default function StarterSelect() {
     
     // Preload audio files in background
     audioManager.preloadAll();
+    
+    // Play audio DIRECTLY in the click handler for strict mobile browsers (iOS Safari)
+    audioManager.play('opening', true);
   };
 
   const handleCinematicClick = () => {
@@ -383,14 +385,14 @@ export default function StarterSelect() {
                 <SpriteSheetFrame
                   src={CINEMATIC_BATTLE_SCENE.gengarFrames}
                   {...BATTLE_GENGAR_FRAMES[Math.min(battleGengarFrame, BATTLE_GENGAR_FRAMES.length - 1)]}
-                  scale={0.82}
+                  scale="calc(0.82 * var(--battle-character-scale))"
                   className="battle-sprite"
                 />
                 {battleScene === 'attack' && (
                   <SpriteSheetFrame
                     src={CINEMATIC_BATTLE_SCENE.gengarAttacks}
                     {...BATTLE_GENGAR_ATTACKS[battleGengarAttackFrame]}
-                    scale={0.82}
+                    scale="calc(0.82 * var(--battle-character-scale))"
                     className="battle-attack"
                   />
                 )}
@@ -400,14 +402,14 @@ export default function StarterSelect() {
                 <SpriteSheetFrame 
                   src={CINEMATIC_BATTLE_SCENE.nidorinoFrames} 
                   {...BATTLE_NIDORINO_FRAMES[battleNidorinoFrame]} 
-                  scale={0.92}
+                  scale="calc(0.92 * var(--battle-character-scale))"
                   className="battle-sprite" 
                 />
                 {(battleScene === 'attack' || battleScene === 'defense') && battleNidorinoEffectFrame >= 0 && (
                   <SpriteSheetFrame 
                     src={CINEMATIC_BATTLE_SCENE.nidorinoEffects} 
                     {...BATTLE_NIDORINO_EFFECTS[battleNidorinoEffectFrame]} 
-                    scale={0.78}
+                    scale="calc(0.78 * var(--battle-character-scale))"
                     className="battle-effects"
                   />
                 )}

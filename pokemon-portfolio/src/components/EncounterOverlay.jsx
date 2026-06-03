@@ -517,9 +517,9 @@ export default function EncounterOverlay() {
   };
 
   const startRun = () => {
+    setPhase(P.ACTION);
     const catchRate = 0.50 + 0.50 * (1 - (wild.hp / wild.maxHp)); // Easier to run if wild HP is low
     if (Math.random() < catchRate) {
-      setPhase(P.RUN);
       audioManager.playSFX('In-Battle Recall Switch Flee Run', true);
       setMessage("Got away safely!");
       later(endBattle, 1500);

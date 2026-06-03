@@ -31,8 +31,8 @@ export default function SpriteSheetFrame({
         display: 'inline-block',
         position: 'relative',
         overflow: 'hidden',
-        width: `${actualWidth * scale}px`,
-        height: `${actualHeight * scale}px`,
+        width: `calc(${actualWidth}px * ${scale})`,
+        height: `calc(${actualHeight}px * ${scale})`,
         ...style,
       }}
     >
@@ -42,8 +42,8 @@ export default function SpriteSheetFrame({
         draggable={false}
         style={{
           position: 'absolute',
-          top: `${-actualSourceY * scale}px`,
-          left: `${-actualSourceX * scale}px`,
+          top: `calc(${-actualSourceY}px * ${scale})`,
+          left: `calc(${-actualSourceX}px * ${scale})`,
           transform: `scale(${scale})`,
           transformOrigin: 'top left',
           imageRendering: 'pixelated',
