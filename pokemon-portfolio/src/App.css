@@ -1,0 +1,4090 @@
+/* ───────────────────────────────────────────────
+   Pokémon FireRed Portfolio — Component Styles
+   Dialogue boxes, menus, mobile controls
+   ─────────────────────────────────────────────── */
+
+@font-face {
+    font-family: "Pokemon Hollow";
+    src: url("/assets/fonts/PokemonHollow.ttf") format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Pokemon Solid";
+    src: url("/assets/fonts/PokemonSolid.ttf") format("truetype");
+    font-display: swap;
+}
+
+
+
+/* ── Game Container ── */
+.game-app {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+#game-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#game-container canvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* ═══════════════════════════════════════════════
+   DIALOGUE BOX — FireRed style
+   ═══════════════════════════════════════════════ */
+
+.dialogue-overlay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: all;
+}
+
+.dialogue-box {
+    width: 92%;
+    max-width: 480px;
+    margin-bottom: 8px;
+    background: #f8f8f0;
+    border: 3px solid #404040;
+    border-radius: 6px;
+    padding: 12px 16px;
+    position: relative;
+    box-shadow:
+        inset 2px 2px 0 #ffffff,
+        inset -2px -2px 0 #d8d8d0,
+        0 4px 12px rgba(0, 0, 0, 0.5);
+    min-height: 64px;
+}
+
+.dialogue-text {
+    font-family: "Press Start 2P", monospace;
+    font-size: 11px;
+    line-height: 1.8;
+    color: #303030;
+    white-space: pre-wrap;
+    min-height: 36px;
+}
+
+.dialogue-arrow {
+    position: absolute;
+    bottom: 6px;
+    right: 12px;
+    font-size: 10px;
+    color: #303030;
+    animation: bounce-arrow 0.6s ease-in-out infinite;
+}
+
+@keyframes bounce-arrow {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(3px);
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   MENU OVERLAY — FireRed window style
+   ═══════════════════════════════════════════════ */
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    animation: fade-in 0.2s ease;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.menu-panel {
+    width: 90%;
+    max-width: 420px;
+    max-height: 85vh;
+    background: #e8e0d0;
+    border: 3px solid #504838;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+        inset 2px 2px 0 #f8f0e0,
+        inset -2px -2px 0 #c8c0b0,
+        0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.menu-header {
+    background: #3868a8;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #284880;
+}
+
+.menu-title {
+    font-family: "Press Start 2P", monospace;
+    font-size: 10px;
+    color: #ffffff;
+    text-shadow: 1px 1px 0 #1a3060;
+}
+
+.menu-close {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 2px 6px;
+    opacity: 0.8;
+}
+
+.menu-close:hover {
+    opacity: 1;
+}
+
+.menu-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.menu-footer {
+    padding: 6px 12px;
+    background: #d8d0c0;
+    border-top: 1px solid #c0b8a8;
+}
+
+.menu-hint {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #808080;
+}
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-subtitle {
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: #504838;
+    padding: 4px 0;
+    border-bottom: 1px solid #c8c0b0;
+    margin-bottom: 4px;
+}
+
+/* ── Project Cards ── */
+.project-card {
+    background: #f8f0e0;
+    border: 2px solid #c0b8a0;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.project-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.project-name {
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: #303030;
+    flex: 1;
+}
+
+.type-badge {
+    font-family: "Press Start 2P", monospace;
+    font-size: 5px;
+    color: #ffffff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.project-level {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #606060;
+}
+
+.project-hp-bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 6px;
+}
+
+.hp-label {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #f0a030;
+}
+
+.hp-track {
+    flex: 1;
+    height: 6px;
+    background: #404040;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid #303030;
+}
+
+.hp-fill {
+    height: 100%;
+    background: #50c060;
+    border-radius: 2px;
+    transition: width 0.5s ease;
+}
+
+.project-desc {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #505050;
+    line-height: 1.6;
+    margin-bottom: 6px;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.tech-tag {
+    font-family: "Press Start 2P", monospace;
+    font-size: 5px;
+    background: #d0c8b0;
+    color: #504838;
+    padding: 2px 4px;
+    border-radius: 2px;
+    border: 1px solid #b8b0a0;
+}
+
+/* ── Skills ── */
+.skill-entry {
+    background: #f8f0e0;
+    border: 1px solid #d0c8b0;
+    border-radius: 4px;
+    padding: 6px 8px;
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.skill-number {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #a0a0a0;
+}
+
+.skill-name {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #303030;
+    flex: 1;
+}
+
+.skill-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.skill-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: #c0b8a0;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #a09880;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.8s ease;
+}
+
+.skill-pct {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #606060;
+    min-width: 28px;
+    text-align: right;
+}
+
+/* ── Trainer Card ── FireRed Layout */
+.tc-firered {
+    background: linear-gradient(180deg, #e8e0d0 0%, #d8d0c0 100%);
+    border: 3px solid #3868a8;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.tc-top-bar {
+    background: linear-gradient(90deg, #3868a8, #4878b8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+}
+
+.tc-title-label {
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+    color: #fff;
+    text-shadow: 1px 1px 0 #1a3060;
+}
+
+.tc-id {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #f8d030;
+}
+
+.tc-main {
+    display: flex;
+    gap: 12px;
+    padding: 10px;
+}
+
+.tc-info-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tc-field {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.tc-label {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #808080;
+    min-width: 52px;
+}
+
+.tc-value {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #303030;
+}
+
+.tc-sprite-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tc-portrait {
+    width: 56px;
+    height: 56px;
+    background: #c8c0b0;
+    border: 2px solid #a09880;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tc-portrait-inner {
+    font-size: 32px;
+}
+
+.tc-badges-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: #d0c8b0;
+}
+
+.tc-badges-label {
+    color: #606060;
+    min-width: 36px;
+}
+
+.tc-badge-slots {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+}
+
+.tc-badge-slot {
+    width: 32px;
+    height: 32px;
+    background: #b8b0a0;
+    border: 1px solid #a09880;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tc-badge-slot.filled {
+    background: #e8e0d0;
+    border-color: #c0a030;
+}
+
+.tc-badge-sprite {
+    width: 28px;
+    height: 28px;
+    image-rendering: pixelated;
+}
+
+.tc-badge-empty {
+    font-size: 12px;
+    color: #908878;
+}
+
+/* ── Controls Section ── */
+.controls-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.control-key {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #3868a8;
+    min-width: 80px;
+    background: #e8e0d0;
+    padding: 3px 6px;
+    border-radius: 3px;
+    border: 1px solid #c0b8a0;
+    text-align: center;
+}
+
+.control-action {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #505050;
+}
+
+.controls-tips {
+    margin-top: 4px;
+}
+
+.control-tip {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #707060;
+    padding: 3px 0;
+    border-bottom: 1px dotted #d0c8b0;
+}
+
+/* ── Options Section ── */
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.option-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    background: #f8f0e0;
+    border: 1px solid #d0c8b0;
+    border-radius: 4px;
+}
+
+.option-label {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #303030;
+}
+
+.option-toggle {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    padding: 4px 12px;
+    border: 2px solid;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.option-toggle.on {
+    background: #50c060;
+    color: #fff;
+    border-color: #308040;
+}
+
+.option-toggle.off {
+    background: #c05050;
+    color: #fff;
+    border-color: #903030;
+}
+
+.option-toggle:hover {
+    transform: scale(1.05);
+}
+
+/* ── Contact ── */
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8f0e0;
+    border: 1px solid #d0c8b0;
+    border-radius: 4px;
+    padding: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.contact-item:hover {
+    background: #f0e8d0;
+}
+
+.contact-icon {
+    font-size: 14px;
+}
+
+.contact-label {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #808080;
+    min-width: 60px;
+}
+
+.contact-value {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #3868a8;
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE CONTROLS — Nintendo D-pad + A/B
+   ═══════════════════════════════════════════════ */
+
+.mobile-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 160px;
+    z-index: 40;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 16px 24px;
+    pointer-events: none;
+}
+
+.dpad-container,
+.ab-container {
+    pointer-events: all;
+}
+
+/* ── D-Pad ── */
+.dpad {
+    display: grid;
+    grid-template-columns: 44px 44px 44px;
+    grid-template-rows: 44px 44px 44px;
+    gap: 0;
+}
+
+.dpad-btn {
+    background: rgba(40, 40, 40, 0.7);
+    border: 2px solid rgba(80, 80, 80, 0.6);
+    color: #ffffff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
+}
+
+.dpad-btn:active {
+    background: rgba(80, 80, 80, 0.9);
+}
+
+.dpad-up {
+    grid-column: 2;
+    grid-row: 1;
+    border-radius: 6px 6px 0 0;
+}
+
+.dpad-left {
+    grid-column: 1;
+    grid-row: 2;
+    border-radius: 6px 0 0 6px;
+}
+
+.dpad-center {
+    grid-column: 2;
+    grid-row: 2;
+    background: rgba(30, 30, 30, 0.8);
+    border: 2px solid rgba(60, 60, 60, 0.6);
+}
+
+.dpad-right {
+    grid-column: 3;
+    grid-row: 2;
+    border-radius: 0 6px 6px 0;
+}
+
+.dpad-down {
+    grid-column: 2;
+    grid-row: 3;
+    border-radius: 0 0 6px 6px;
+}
+
+/* ── A/B Buttons ── */
+.ab-container {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.ab-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid rgba(80, 80, 80, 0.6);
+    font-family: "Press Start 2P", monospace;
+    font-size: 14px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
+}
+
+.btn-a {
+    background: rgba(60, 120, 200, 0.7);
+    margin-bottom: 20px;
+}
+
+.btn-a:active {
+    background: rgba(80, 140, 220, 0.9);
+}
+
+.btn-b {
+    background: rgba(200, 60, 60, 0.7);
+}
+
+.btn-b:active {
+    background: rgba(220, 80, 80, 0.9);
+}
+
+/* ═══════════════════════════════════════════════
+   Scrollbar styling for menu
+   ═══════════════════════════════════════════════ */
+
+.menu-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.menu-body::-webkit-scrollbar-track {
+    background: #d0c8b0;
+}
+
+.menu-body::-webkit-scrollbar-thumb {
+    background: #a09880;
+    border-radius: 3px;
+}
+
+/* ═══════════════════════════════════════════════
+   MAIN MENU — FireRed style sidebar
+   ═══════════════════════════════════════════════ */
+
+.main-menu-panel {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    background: #e8e0d0;
+    border: 3px solid #504838;
+    border-radius: 8px;
+    box-shadow:
+        inset 2px 2px 0 #f8f0e0,
+        inset -2px -2px 0 #c8c0b0,
+        0 8px 24px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    z-index: 100;
+    animation: slide-in-right 0.15s ease-out;
+}
+
+@keyframes slide-in-right {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.main-menu-list {
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    min-width: 160px;
+}
+
+.main-menu-item {
+    background: none;
+    border: none;
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+    color: #303030;
+    padding: 10px 14px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.1s;
+    border-radius: 4px;
+}
+
+.main-menu-item:hover {
+    background: #d0c8b0;
+}
+
+.main-menu-item:active {
+    background: #c0b898;
+}
+
+.mm-icon {
+    font-size: 12px;
+    width: 18px;
+    text-align: center;
+}
+
+.mm-icon-img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    vertical-align: middle;
+}
+
+.menu-panel.wide {
+    max-width: 520px;
+    width: 94%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ═══════════════════════════════════════════════
+   STARTER SELECT — Full screen intro
+   ═══════════════════════════════════════════════ */
+
+.starter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    background:
+        radial-gradient(circle at 50% 34%,
+            rgba(255, 255, 255, 0.7) 0%,
+            rgba(255, 255, 255, 0.2) 24%,
+            rgba(255, 255, 255, 0) 48%),
+        linear-gradient(180deg,
+            #eef7f4 0%,
+            #eef7f4 58%,
+            #cfe4df 72%,
+            #8eb9b3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fade-in 0.5s ease;
+}
+
+.starter-cinematic {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    container-type: inline-size;
+}
+
+.cinematic-start-screen {
+    position: relative;
+    width: min(100vw, calc(100vh * 960 / 636));
+    height: min(100vh, calc(100vw * 636 / 960));
+    aspect-ratio: 960 / 636;
+    max-height: 100vh;
+    overflow: hidden;
+    container-type: inline-size;
+}
+
+.cinematic-frame {
+    position: relative;
+    width: min(100vw, calc(100vh * 960 / 640));
+    height: min(100vh, calc(100vw * 640 / 960));
+    aspect-ratio: 960 / 640;
+    max-height: 100vh;
+    overflow: hidden;
+    container-type: inline-size;
+    display: block;
+    object-fit: fill;
+    object-position: center;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.cinematic-battle-wrap,
+.cinematic-rise-wrap,
+.cinematic-battle-final {
+    position: relative;
+    max-height: 100vh;
+    overflow: hidden;
+    container-type: inline-size;
+}
+
+.cinematic-battle-wrap {
+    width: min(100vw, calc(100vh * 1022 / 634));
+    height: min(100vh, calc(100vw * 634 / 1022));
+    aspect-ratio: 1022 / 634;
+    background: #ffffff;
+}
+
+.cinematic-bg-viewport,
+.cinematic-grass-viewport {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.cinematic-bg-viewport {
+    top: 0;
+    height: 100%;
+    z-index: 1;
+}
+
+.cinematic-grass-viewport {
+    bottom: 0;
+    height: 40%;
+    z-index: 3;
+}
+
+.cinematic-scroll-track {
+    display: flex;
+    align-items: stretch;
+    width: 200%;
+    height: 100%;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.cinematic-scroll-right {
+    animation: intro-scroll-right 3s linear forwards;
+}
+
+.cinematic-scroll-left {
+    animation: intro-scroll-left 3s linear forwards;
+}
+
+.cinematic-strip-image {
+    display: block;
+    width: 50%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center center;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    flex: 0 0 50%;
+}
+
+.cinematic-gengar,
+.cinematic-nidorino {
+    position: absolute;
+    bottom: 22%;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    z-index: 2;
+}
+
+.cinematic-gengar {
+    left: 9%;
+    bottom: 20%;
+    width: min(28cqw, 318px);
+}
+
+.cinematic-nidorino {
+    right: 10%;
+    bottom: 20%;
+    width: min(24cqw, 278px);
+}
+
+.cinematic-grass-viewport {
+    bottom: 0;
+    height: 46%;
+    z-index: 3;
+}
+
+.cinematic-rise-wrap {
+    width: min(100vw, calc(100vh * 1020 / 640));
+    height: min(100vh, calc(100vw * 640 / 1020));
+    aspect-ratio: 1020 / 640;
+    background: #000;
+}
+
+.cinematic-rise-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center 12%;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    animation: rise-bg-drop 2s linear forwards;
+}
+
+.cinematic-rise-bar {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 92px;
+    background: #000;
+    z-index: 2;
+    animation: rise-bar-drop 2s linear forwards;
+}
+
+.cinematic-rise-bar-top {
+    top: 0;
+}
+
+.cinematic-rise-bar-bottom {
+    bottom: 0;
+}
+
+.cinematic-rise-gengar {
+    position: absolute;
+    left: 7%;
+    bottom: 13%;
+    width: min(30cqw, 330px);
+    z-index: 3;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    animation: rise-gengar-up 2s ease-out forwards;
+}
+
+@keyframes intro-scroll-right {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes intro-scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes rise-bg-drop {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(40px);
+    }
+}
+
+@keyframes rise-bar-drop {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(30px);
+        opacity: 1;
+    }
+}
+
+@keyframes rise-gengar-up {
+    0% {
+        transform: translateY(44px);
+    }
+
+    100% {
+        transform: translateY(-5px);
+    }
+}
+
+.cinematic-battle-final {
+    width: min(100vw, calc(100vh * 1023 / 626));
+    height: min(100vh, calc(100vw * 626 / 1023));
+    aspect-ratio: 1023 / 626;
+    background: #000;
+    --battle-character-scale: 1;
+}
+
+.cinematic-battle-final::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    background: #fff;
+    opacity: 0;
+}
+
+.battle-final-settle::after {
+    animation: battle-white-flash 0.42s steps(4, end) 0.08s forwards;
+}
+
+.start-screen-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    container-type: inline-size;
+    transform: scaleY(0);
+    transform-origin: center center;
+    animation: start-screen-open 0.5s steps(8, end) forwards;
+}
+
+.start-screen-initial {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    z-index: 0;
+}
+
+.start-screen-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    z-index: 1;
+    transform: translate3d(-102%, 0, 0);
+    animation: start-bg-slide-in 0.5s steps(8, end) 0.5s forwards;
+}
+
+.start-screen-charizard {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    z-index: 4;
+    transform: translate3d(102%, 0, 0);
+    animation: start-charizard-slide-in 0.5s steps(8, end) 1s forwards;
+}
+
+.start-screen-flame-layer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30.5%;
+    height: 40%;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.start-screen-flame {
+    position: absolute;
+    bottom: -18%;
+    width: clamp(22px, 4.7cqw, 54px);
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    opacity: 0;
+    transform: translate3d(-50%, 64px, 0) scale(var(--flame-scale));
+    transform-origin: 50% 100%;
+    animation: start-flame-rise var(--flame-duration) linear calc(var(--flame-delay) + 2.15s) infinite;
+    mix-blend-mode: normal;
+}
+
+.start-screen-title-wrap {
+    position: absolute;
+    left: 2.8%;
+    top: 4.3%;
+    width: 66%;
+    height: 23%;
+    z-index: 6;
+    text-align: left;
+    --start-title-transform: rotate(-2deg) skewX(-5deg);
+    opacity: 0;
+    transform: translate3d(-115%, 0, 0) var(--start-title-transform);
+    transform-origin: left top;
+    animation: start-title-slide-in 0.5s steps(8, end) 1.5s forwards;
+}
+
+.start-screen-title-layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: flex-start;
+    font-size: clamp(58px, 9.8cqw, 118px);
+    letter-spacing: 0;
+    line-height: 0.92;
+    white-space: nowrap;
+}
+
+.start-screen-title-layer span {
+    display: inline-block;
+    margin-right: -0.09em;
+    transform-origin: 50% 78%;
+}
+
+.start-screen-title-layer span:nth-child(1) {
+    transform: translateY(14px) rotate(-11deg) scaleX(1.06);
+}
+
+.start-screen-title-layer span:nth-child(2) {
+    transform: translateY(4px) rotate(-6deg) scaleX(1.03);
+}
+
+.start-screen-title-layer span:nth-child(3) {
+    transform: translateY(-3px) rotate(-3deg);
+}
+
+.start-screen-title-layer span:nth-child(4) {
+    transform: translateY(-7px) rotate(1deg) scaleX(1.04);
+}
+
+.start-screen-title-layer span:nth-child(5) {
+    transform: translateY(-11px) rotate(4deg) scaleX(1.05);
+}
+
+.start-screen-title-layer span:nth-child(6) {
+    transform: translateY(-8px) rotate(7deg) scaleX(1.03);
+}
+
+.start-screen-title-layer span:nth-child(7) {
+    transform: translateY(-1px) rotate(7deg);
+}
+
+.start-screen-title-layer span:nth-child(8) {
+    transform: translateY(7px) rotate(5deg) scaleX(0.95);
+}
+
+.start-screen-title-layer span:nth-child(9) {
+    transform: translateY(15px) rotate(8deg) scaleX(1.03);
+}
+
+.start-screen-title-hollow {
+    font-family: "Pokemon Hollow", monospace;
+    color: #284dce;
+    text-shadow:
+        4px 4px 0 #081828,
+        -2px 3px 0 #081828,
+        0 7px 0 #153aa4;
+}
+
+.start-screen-title-solid {
+    font-family: "Pokemon Solid", monospace;
+    color: #ffdf35;
+    text-shadow:
+        3px 3px 0 #2453db,
+        -3px 3px 0 #2453db,
+        4px 7px 0 #091633;
+    filter: drop-shadow(0 0 1px #fff48a);
+}
+
+.start-screen-version {
+    position: absolute;
+    left: 22%;
+    top: 34.2%;
+    z-index: 6;
+    font-family: "Pokemon Fire Red", monospace;
+    font-size: clamp(34px, 6.2cqw, 70px);
+    line-height: 0.82;
+    color: #ffffff;
+    letter-spacing: 0;
+    text-align: center;
+    font-weight: 900;
+    paint-order: stroke fill;
+    --start-version-transform: rotate(-1deg) skewX(-4deg);
+    opacity: 0;
+    transform: translate3d(-105%, 0, 0) var(--start-version-transform);
+    -webkit-text-stroke: 3px #080808;
+    text-shadow:
+        4px 0 0 #080808,
+        -4px 0 0 #080808,
+        0 4px 0 #080808,
+        0 -4px 0 #080808,
+        3px 3px 0 #080808,
+        -3px 3px 0 #080808,
+        4px 5px 0 #6f6f6f,
+        8px 9px 0 #080808;
+    animation: start-version-slide-in 0.5s steps(8, end) 1.65s forwards;
+}
+
+.start-screen-version span {
+    display: block;
+}
+
+@keyframes start-flame-rise {
+    0% {
+        opacity: 0;
+        transform: translate3d(-50%, 66px, 0) scale(calc(var(--flame-scale) * 0.82));
+    }
+
+    12% {
+        opacity: var(--flame-opacity);
+    }
+
+    72% {
+        opacity: calc(var(--flame-opacity) * 0.85);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(calc(-50% + var(--flame-drift)), -124px, 0) scale(calc(var(--flame-scale) * 0.64));
+    }
+}
+
+@keyframes start-screen-open {
+    0% {
+        transform: scaleY(0);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes start-bg-slide-in {
+    0% {
+        transform: translate3d(-102%, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes start-charizard-slide-in {
+    0% {
+        transform: translate3d(102%, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes start-title-slide-in {
+    0% {
+        opacity: 1;
+        transform: translate3d(-115%, 0, 0) var(--start-title-transform);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) var(--start-title-transform);
+    }
+}
+
+@keyframes start-version-slide-in {
+    0% {
+        opacity: 1;
+        transform: translate3d(-105%, 0, 0) var(--start-version-transform);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) var(--start-version-transform);
+    }
+}
+
+.battle-layer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.battle-bg {
+    top: 0;
+    height: 100%;
+    z-index: 1;
+}
+
+.battle-grass {
+    bottom: 0;
+    height: 19%;
+    z-index: 2;
+}
+
+.battle-track {
+    display: flex;
+    width: 400%;
+    height: 100%;
+    transform: translateX(-25%);
+}
+
+.battle-track-image,
+.battle-grass-image {
+    width: 25%;
+    height: 100%;
+    object-fit: fill;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    flex: 0 0 25%;
+    margin-right: -1px;
+}
+
+.battle-bg.fast .battle-track {
+    animation: battle-scroll-left-fast 0.7s ease-out forwards;
+}
+
+.battle-bg.slow .battle-track {
+    animation: battle-scroll-left-slow 12s linear infinite;
+}
+
+.battle-grass {
+    position: absolute;
+    bottom: 16%;
+    left: 0;
+    z-index: 6;
+    will-change: transform;
+}
+
+.battle-grass-image {
+    width: min(22cqw, 205px);
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.battle-grass-approach {
+    animation: battle-grass-slide-in 0.7s ease-out forwards;
+}
+
+.battle-grass-hidden {
+    transform: translate3d(150cqw, 0, 0);
+}
+
+.battle-grass-stare,
+.battle-grass-attack,
+.battle-grass-defense,
+.battle-grass-leap,
+.battle-grass-settle {
+    animation: battle-grass-pan 12s linear forwards;
+}
+
+.battle-gengar,
+.battle-nidorino {
+    position: absolute;
+    z-index: 5;
+    will-change: transform;
+}
+
+.battle-gengar {
+    left: 13%;
+    bottom: 23%;
+    transform: translate3d(130cqw, 0, 0);
+}
+
+.battle-gengar-approach {
+    animation: battle-gengar-slide-in 0.7s ease-out forwards;
+}
+
+.battle-gengar-hidden {
+    transform: translate3d(130cqw, 0, 0);
+}
+
+.battle-gengar-stare {
+    transform: translate3d(0, 0, 0);
+}
+
+.battle-gengar-attack {
+    animation: battle-gengar-attack 0.7s ease-out forwards;
+}
+
+.battle-gengar-defense {
+    transform: translate3d(0, 0, 0);
+}
+
+.battle-gengar-leap {
+    transform: translate3d(0, 0, 0);
+}
+
+.battle-gengar-settle {
+    transform: translate3d(0, 0, 0);
+}
+
+.battle-nidorino {
+    right: 15%;
+    bottom: 22%;
+    transform: translate3d(-130cqw, 0, 0);
+}
+
+.battle-nidorino-approach {
+    animation: battle-nidorino-slide-in 0.7s ease-out forwards;
+}
+
+.battle-nidorino-hidden {
+    transform: translate3d(-130cqw, 0, 0);
+}
+
+.battle-nidorino-stare {
+    transform: translate3d(0, 0, 0);
+}
+
+.battle-nidorino-attack {
+    transform: translate3d(0, 0, 0);
+}
+
+.battle-nidorino-defense {
+    animation: battle-nidorino-defense-arc 1s ease-in-out forwards;
+}
+
+.battle-nidorino-leap {
+    animation: battle-nidorino-leap-arc 1s ease-in-out forwards;
+}
+
+.battle-nidorino-settle {
+    transform: translate3d(0, -34px, 0);
+}
+
+.battle-sprite {
+    display: block;
+    transform: scale(var(--battle-character-scale));
+    transform-origin: bottom left;
+}
+
+.battle-attack {
+    position: absolute;
+    left: 38%;
+    top: 8%;
+    z-index: 4;
+    transform: scale(var(--battle-character-scale));
+    transform-origin: left center;
+}
+
+.battle-effects {
+    position: absolute;
+    left: -9%;
+    bottom: 24%;
+    z-index: 2;
+    transform: scale(var(--battle-character-scale));
+    transform-origin: center center;
+}
+
+@keyframes battle-scroll-left-fast {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-25%);
+    }
+}
+
+@keyframes battle-scroll-left-slow {
+    0% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes battle-grass-slide-in {
+    0% {
+        transform: translate3d(120cqw, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(47cqw, 0, 0);
+    }
+}
+
+@keyframes battle-grass-pan {
+    0% {
+        transform: translate3d(47cqw, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-78cqw, 0, 0);
+    }
+}
+
+@keyframes battle-gengar-slide-in {
+    0% {
+        transform: translate3d(130cqw, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes battle-nidorino-slide-in {
+    0% {
+        transform: translate3d(-130cqw, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes battle-gengar-attack {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    25% {
+        transform: translate3d(-10px, -4px, 0);
+    }
+
+    60% {
+        transform: translate3d(-16px, -2px, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes battle-nidorino-defense-arc {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    40% {
+        transform: translate3d(18px, -38px, 0);
+    }
+
+    75% {
+        transform: translate3d(24px, -14px, 0);
+    }
+
+    100% {
+        transform: translate3d(30px, 0, 0);
+    }
+}
+
+@keyframes battle-nidorino-leap-arc {
+    0% {
+        transform: translate3d(30px, 0, 0);
+    }
+
+    65% {
+        transform: translate3d(-12px, -44px, 0);
+    }
+
+    100% {
+        transform: translate3d(2px, -34px, 0);
+    }
+}
+
+@keyframes battle-white-flash {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@container (max-width: 1180px) {
+    .cinematic-battle-final {
+        --battle-character-scale: 0.92;
+    }
+
+    .battle-gengar {
+        left: 11%;
+        bottom: 22%;
+    }
+
+    .battle-nidorino {
+        right: 12%;
+        bottom: 21%;
+    }
+
+    .battle-grass {
+        bottom: 15%;
+    }
+}
+
+@container (max-width: 1000px) {
+    .cinematic-battle-final {
+        --battle-character-scale: 0.86;
+    }
+
+    .battle-gengar {
+        left: 9%;
+        bottom: 21%;
+    }
+
+    .battle-nidorino {
+        right: 10%;
+        bottom: 20%;
+    }
+
+    .battle-grass-image {
+        width: min(24cqw, 190px);
+    }
+}
+
+/* ── Intro phase ── */
+.starter-intro {
+    width: min(100%, 560px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    cursor: pointer;
+    padding: 24px 16px;
+}
+
+.starter-prof-frame {
+    width: 100%;
+    min-height: 220px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.sprite-sheet-frame {
+    display: block;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    flex-shrink: 0;
+}
+
+.starter-prof-sprite {
+    position: relative;
+    z-index: 1;
+    transform: translateY(-12px);
+}
+
+.starter-prof-frame::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    width: 180px;
+    height: 34px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(208, 237, 230, 0.95) 0%,
+            rgba(208, 237, 230, 0.8) 48%,
+            rgba(208, 237, 230, 0.35) 70%,
+            rgba(208, 237, 230, 0) 100%);
+}
+
+.starter-dialogue-box {
+    width: 90%;
+    max-width: 400px;
+    background: #f7f7ef;
+    border: 4px solid #424242;
+    border-radius: 6px;
+    padding: 16px 20px 20px;
+    position: relative;
+    box-shadow:
+        inset 2px 2px 0 #ffffff,
+        inset -2px -2px 0 #d8d8d0,
+        0 4px 12px rgba(0, 0, 0, 0.5);
+    min-height: 80px;
+}
+
+.starter-dialogue-text {
+    font-family: "Press Start 2P", monospace;
+    font-size: 11px;
+    line-height: 1.9;
+    color: #303030;
+    white-space: pre-wrap;
+}
+
+.starter-dialogue-box .dialogue-arrow {
+    color: #d64636;
+    right: 14px;
+    bottom: 8px;
+    font-size: 18px;
+}
+
+/* ── Selection phase ── */
+.starter-select-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 20px;
+}
+
+.starter-title {
+    font-family: "Press Start 2P", monospace;
+    font-size: 13px;
+    color: #f8fbff;
+    text-shadow: 2px 2px 0 #30548f;
+    letter-spacing: 0.5px;
+}
+
+.starter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 380px;
+    width: 100%;
+}
+
+.starter-card {
+    background: #2a2a3a;
+    border: 3px solid #404060;
+    border-radius: 12px;
+    padding: 16px 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.starter-card:hover {
+    background: #3a3a50;
+    border-color: #6080c0;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(96, 128, 192, 0.3);
+}
+
+.starter-ball {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at 35% 35%,
+            #f0f0f0 0%,
+            #d0d0d0 50%,
+            #a0a0a0 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #606060;
+    position: relative;
+    overflow: hidden;
+}
+
+.starter-ball::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #404040;
+}
+
+.starter-sprite {
+    width: 64px;
+    height: 64px;
+    image-rendering: pixelated;
+    position: relative;
+    z-index: 1;
+    animation: starter-bounce 1s ease-in-out infinite;
+}
+
+@keyframes starter-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+.starter-name {
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+    color: #ffffff;
+}
+
+.starter-types {
+    display: flex;
+    gap: 4px;
+}
+
+/* ── Confirm phase ── */
+.starter-confirm-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+}
+
+.confirm-sprite-wrap {
+    position: relative;
+}
+
+.confirm-sprite {
+    width: 128px;
+    height: 128px;
+    image-rendering: pixelated;
+    animation: confirm-pop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes confirm-pop {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.confirm-sparkle {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle, #fff 0%, transparent 70%);
+    animation: sparkle 1s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.confirm-name {
+    font-family: "Press Start 2P", monospace;
+    font-size: 16px;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #304878;
+}
+
+.confirm-types {
+    display: flex;
+    gap: 6px;
+}
+
+.confirm-text {
+    font-family: "Press Start 2P", monospace;
+    font-size: 10px;
+    color: #c0c0c0;
+}
+
+.confirm-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.confirm-btn {
+    font-family: "Press Start 2P", monospace;
+    font-size: 12px;
+    padding: 12px 32px;
+    border: 3px solid #404040;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.confirm-btn.yes {
+    background: #50c060;
+    color: #fff;
+    border-color: #308040;
+}
+
+.confirm-btn.yes:hover {
+    background: #60d070;
+    transform: scale(1.05);
+}
+
+.confirm-btn.no {
+    background: #c05050;
+    color: #fff;
+    border-color: #803030;
+}
+
+.confirm-btn.no:hover {
+    background: #d06060;
+    transform: scale(1.05);
+}
+
+/* ═══════════════════════════════════════════════
+   PARTY VIEW — 6 Pokémon slots
+   ═══════════════════════════════════════════════ */
+
+.party-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.party-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #3868a8;
+    border-bottom: 2px solid #284880;
+}
+
+.party-header h3 {
+    font-family: "Press Start 2P", monospace;
+    font-size: 10px;
+    color: #fff;
+    text-shadow: 1px 1px 0 #1a3060;
+}
+
+.party-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.party-slots {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.party-slot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0e8d8;
+    border: 2px solid #c0b898;
+    border-radius: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+}
+
+.party-slot:hover {
+    background: #e8e0c8;
+}
+
+.party-slot.selected {
+    border-color: #3868a8;
+    background: #d8e8f8;
+    box-shadow: 0 0 0 2px rgba(56, 104, 168, 0.3);
+}
+
+.party-slot.lead {
+    border-color: #c0a030;
+}
+
+.party-slot.empty {
+    background: #e0d8c8;
+    border-style: dashed;
+    justify-content: center;
+    min-height: 48px;
+    cursor: default;
+    opacity: 0.5;
+}
+
+.slot-empty-ball {
+    font-size: 16px;
+    color: #a09880;
+    margin-right: 4px;
+}
+
+.slot-empty-text {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #a09880;
+}
+
+.lead-badge {
+    position: absolute;
+    top: -6px;
+    left: 4px;
+    font-family: "Press Start 2P", monospace;
+    font-size: 5px;
+    background: #c0a030;
+    color: #fff;
+    padding: 1px 4px;
+    border-radius: 2px;
+}
+
+.shiny-badge {
+    position: absolute;
+    top: -6px;
+    right: 4px;
+    font-size: 10px;
+    color: #f0c030;
+    animation: sparkle 1.5s infinite;
+}
+
+.slot-sprite {
+    width: 40px;
+    height: 40px;
+    image-rendering: pixelated;
+}
+
+.slot-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.slot-name {
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: #303030;
+}
+
+.slot-level {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #606060;
+}
+
+.slot-types {
+    display: flex;
+    gap: 3px;
+}
+
+.type-badge-sm {
+    font-family: "Press Start 2P", monospace;
+    font-size: 4px;
+    color: #fff;
+    padding: 1px 3px;
+    border-radius: 2px;
+    text-transform: uppercase;
+}
+
+.slot-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 2px;
+}
+
+.hp-bar-container,
+.xp-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.hp-bar-label,
+.xp-bar-label {
+    font-family: "Press Start 2P", monospace;
+    font-size: 5px;
+    color: #808080;
+    min-width: 14px;
+}
+
+.hp-bar-track,
+.xp-bar-track {
+    flex: 1;
+    height: 4px;
+    background: #404040;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.hp-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.xp-bar-fill {
+    height: 100%;
+    background: #4890d0;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.hp-text {
+    font-family: "Press Start 2P", monospace;
+    font-size: 5px;
+    color: #606060;
+    min-width: 36px;
+    text-align: right;
+}
+
+.release-btn {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    font-family: "Press Start 2P", monospace;
+    font-size: 5px;
+    background: #c05050;
+    color: #fff;
+    border: 1px solid #903030;
+    border-radius: 3px;
+    padding: 2px 6px;
+    cursor: pointer;
+}
+
+.party-hint {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #808080;
+    text-align: center;
+    padding: 4px;
+}
+
+.party-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 12px;
+    background: #d8d0c0;
+    border-top: 1px solid #c0b8a8;
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #606060;
+}
+
+/* ═══════════════════════════════════════════════
+   POKéDEX VIEW — 151 grid
+   ═══════════════════════════════════════════════ */
+
+.pokedex-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.pokedex-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #c83838;
+    border-bottom: 2px solid #a02020;
+}
+
+.pokedex-header h3 {
+    font-family: "Press Start 2P", monospace;
+    font-size: 10px;
+    color: #fff;
+    text-shadow: 1px 1px 0 #802020;
+}
+
+.pokedex-count {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #ffc0c0;
+    margin-left: auto;
+}
+
+.pokedex-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.pokedex-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    padding: 8px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+}
+
+.pokedex-entry {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    padding: 4px;
+    background: #f0e8d8;
+    border: 1px solid #d0c8b0;
+    border-radius: 4px;
+    gap: 4px;
+}
+
+.pokedex-entry.unknown {
+    opacity: 0.6;
+}
+
+.pokedex-entry.caught {
+    border-color: #50a060;
+    background: #e8f0e8;
+}
+
+.pokedex-id {
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: #a0a0a0;
+    margin-bottom: 2px;
+}
+
+.pokedex-sprite {
+    width: 64px;
+    height: 64px;
+    image-rendering: pixelated;
+}
+
+.pokedex-sprite.silhouette {
+    filter: brightness(0) saturate(0);
+}
+
+.pokedex-owned-badge {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background: #3868a8;
+    color: white;
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid #204070;
+}
+
+.pokedex-name {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #303030;
+    text-align: center;
+    word-break: break-all;
+}
+
+.pokedex-types {
+    display: flex;
+    gap: 2px;
+}
+
+.type-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+/* ═══════════════════════════════════════════════
+   LEVEL UP / EVOLUTION OVERLAYS
+   ═══════════════════════════════════════════════ */
+
+.levelup-overlay {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 150;
+    animation: slide-down 0.3s ease-out;
+    cursor: pointer;
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateX(-50%) translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.levelup-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f0e8d0;
+    border: 3px solid #504838;
+    border-radius: 8px;
+    padding: 8px 16px;
+    box-shadow:
+        inset 2px 2px 0 #f8f0e0,
+        inset -2px -2px 0 #c8c0b0,
+        0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.levelup-sprite {
+    width: 40px;
+    height: 40px;
+    image-rendering: pixelated;
+}
+
+.levelup-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.levelup-name {
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+    color: #303030;
+}
+
+.levelup-msg {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #606060;
+}
+
+/* ── Evolution overlay ── */
+.evolution-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 180;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: fade-in 0.3s ease;
+}
+
+.evolution-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.evo-flash {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+    animation: evo-flash-anim 0.8s ease-out;
+}
+
+@keyframes evo-flash-anim {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+}
+
+.evo-text {
+    font-family: "Press Start 2P", monospace;
+    font-size: 11px;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.evo-morph-container {
+    position: relative;
+    width: 128px;
+    height: 128px;
+}
+
+.evo-sprite {
+    width: 128px;
+    height: 128px;
+    image-rendering: pixelated;
+}
+
+.evo-fade-out {
+    position: absolute;
+    animation: evo-out 1.2s ease forwards;
+}
+
+@keyframes evo-out {
+    0% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        filter: brightness(3);
+    }
+
+    100% {
+        opacity: 0;
+        filter: brightness(5);
+    }
+}
+
+.evo-fade-in {
+    position: absolute;
+    animation: evo-in 1.2s ease forwards;
+}
+
+@keyframes evo-in {
+    0% {
+        opacity: 0;
+        filter: brightness(5);
+    }
+
+    50% {
+        opacity: 0.5;
+        filter: brightness(3);
+    }
+
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+.evo-final {
+    animation: evo-reveal 0.5s ease;
+}
+
+@keyframes evo-reveal {
+    0% {
+        transform: scale(1.5);
+        filter: brightness(2);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   FLOATING MENU BUTTON
+   ═══════════════════════════════════════════════ */
+.menu-fab {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 45;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #f8d030;
+    color: #f8d030;
+    font-size: 20px;
+    font-family: "Press Start 2P", monospace;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background 0.2s,
+        transform 0.15s;
+    text-shadow: 0 0 6px rgba(248, 208, 48, 0.5);
+}
+
+.menu-fab:hover {
+    background: rgba(248, 208, 48, 0.2);
+    transform: scale(1.1);
+}
+
+.menu-fab:active {
+    transform: scale(0.95);
+}
+
+/* ═══════════════════════════════════════════════
+   DESKTOP CONTROLS HINT
+   ═══════════════════════════════════════════════ */
+.controls-hint {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 40;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #4ade80;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: #ffffff;
+    cursor: pointer;
+    animation: hint-appear 0.4s ease;
+}
+
+@keyframes hint-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hint-row {
+    margin-bottom: 6px;
+    color: #4ade80;
+}
+
+.hint-row span {
+    color: #ffffff;
+    margin-left: 8px;
+}
+
+.hint-dismiss {
+    margin-top: 8px;
+    font-size: 6px;
+    color: #888;
+    text-align: center;
+}
+
+/* ═══════════════════════════════════════════════
+   GENDER SELECTION
+   ═══════════════════════════════════════════════ */
+.gender-grid {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+}
+
+.gender-card {
+    background: linear-gradient(180deg, #2d2d44 0%, #26263a 100%);
+    border: 3px solid #4a4a72;
+    border-radius: 14px;
+    padding: 22px 24px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s;
+    min-width: 120px;
+}
+
+.gender-card:hover {
+    background: linear-gradient(180deg, #383852 0%, #2d2d44 100%);
+    border-color: #76a0df;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(96, 128, 192, 0.3);
+}
+
+.gender-sprite-frame {
+    width: 112px;
+    height: 112px;
+    background: radial-gradient(circle at 35% 35%, #4c4c74 0%, #2a2a40 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #6d6d95;
+}
+
+.gender-sprite {
+    transform: translateY(6px);
+}
+
+.gender-label {
+    font-family: "Press Start 2P", monospace;
+    font-size: 11px;
+    color: #ffffff;
+}
+
+/* ═══════════════════════════════════════════════
+   TRAINER CARD — portrait image
+   ═══════════════════════════════════════════════ */
+.tc-portrait-img {
+    width: 36px;
+    height: 44px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* ═══════════════════════════════════════════════
+   BATTLE OVERLAY — FireRed Style
+   ═══════════════════════════════════════════════ */
+.battle-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: encounter-flash 0.6s ease;
+    background: rgba(0, 0, 0, 0.92);
+}
+
+@keyframes encounter-flash {
+    0% {
+        background: #fff;
+    }
+
+    30% {
+        background: #000;
+    }
+
+    60% {
+        background: #fff;
+    }
+
+    100% {
+        background: rgba(0, 0, 0, 0.92);
+    }
+}
+
+.battle-screen {
+    width: 420px;
+    max-width: 95vw;
+    background: linear-gradient(180deg,
+            #88c0a8 0%,
+            #68a890 40%,
+            #98d0a0 50%,
+            #78b880 100%);
+    border: 3px solid #404040;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+    position: relative;
+}
+
+.battle-top {
+    display: flex;
+    justify-content: flex-start;
+    padding: 8px 12px;
+}
+
+.battle-bottom {
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px 12px;
+}
+
+.battle-info-bar {
+    background: #f8f0d8;
+    border: 2px solid #606060;
+    border-radius: 6px;
+    padding: 6px 10px;
+    min-width: 160px;
+    box-shadow:
+        inset 1px 1px 0 #fff,
+        inset -1px -1px 0 #d0c8b0;
+}
+
+.battle-info-bar.enemy {
+    border-radius: 0 6px 6px 0;
+    border-left: none;
+    margin-left: -12px;
+    padding-left: 16px;
+}
+
+.battle-info-bar.player {
+    border-radius: 6px 0 0 6px;
+    border-right: none;
+    margin-right: -12px;
+    padding-right: 16px;
+}
+
+.battle-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.battle-pkmn-name {
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: #303030;
+}
+
+.battle-pkmn-level {
+    font-family: "Press Start 2P", monospace;
+    font-size: 7px;
+    color: #606060;
+}
+
+.battle-hp-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.battle-hp-label {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #f0a030;
+    font-weight: bold;
+}
+
+.battle-hp-track {
+    flex: 1;
+    height: 5px;
+    background: #404040;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid #303030;
+}
+
+.battle-hp-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition:
+        width 0.4s ease,
+        background-color 0.4s;
+}
+
+.battle-hp-text {
+    font-family: "Press Start 2P", monospace;
+    font-size: 6px;
+    color: #505050;
+    text-align: right;
+    margin-top: 2px;
+}
+
+.battle-scene {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 8px 24px;
+    min-height: 100px;
+    position: relative;
+}
+
+.battle-wild-sprite {
+    position: relative;
+}
+
+.battle-sprite-img {
+    width: 80px;
+    height: 80px;
+    image-rendering: pixelated;
+}
+
+.battle-sprite-img.player-back {
+    transform: scaleX(-1);
+}
+
+.slide-in-right {
+    animation: battle-slide-in 0.5s ease-out;
+}
+
+@keyframes battle-slide-in {
+    from {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.faint-anim {
+    animation: faint 0.6s ease forwards;
+}
+
+@keyframes faint {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+}
+
+.battle-shiny-star {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-size: 14px;
+    color: #f0c030;
+    animation: sparkle 1.5s infinite;
+}
+
+.battle-player-sprite {
+    display: flex;
+    align-items: flex-end;
+}
+
+.battle-message-box {
+    background: #f8f8f0;
+    border: 3px solid #404040;
+    border-left: none;
+    border-right: none;
+    padding: 10px 16px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    box-shadow:
+        inset 2px 2px 0 #fff,
+        inset -2px -2px 0 #d8d8d0;
+}
+
+.battle-message {
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+    line-height: 1.8;
+    color: #303030;
+}
+
+.battle-menu {
+    display: flex;
+    background: #f8f0d8;
+    border-top: 2px solid #404040;
+}
+
+.battle-menu-prompt {
+    flex: 1;
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: #303030;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+}
+
+.battle-menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    background: #f8f0d8;
+    border-left: 2px solid #404040;
+    min-width: 180px;
+    padding: 4px;
+}
+
+.battle-menu-btn {
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+    padding: 8px 12px;
+    background: #f8f0d8;
+    border: none;
+    color: #303030;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.1s;
+    border-radius: 2px;
+}
+
+.battle-menu-btn:hover:not(:disabled) {
+    background: #e8e0c8;
+}
+
+.battle-menu-btn:active:not(:disabled) {
+    background: #d8d0b8;
+}
+
+.battle-menu-btn:disabled {
+    color: #a0a0a0;
+    cursor: default;
+}
+
+.battle-menu-btn.fight {
+    color: #c83838;
+}
+
+.battle-menu-btn.run {
+    color: #38a868;
+}
+
+.battle-party-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 4px 8px;
+    background: #e8e0d0;
+    justify-content: center;
+}
+
+.party-ball {
+    font-size: 8px;
+    color: #b0a890;
+}
+
+.party-ball.filled {
+    color: #c83838;
+}
+
+.battle-caught-anim {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pokeball-caught {
+    font-size: 32px;
+    color: #c83838;
+    animation: pokeball-drop 0.5s ease-in;
+}
+
+@keyframes pokeball-drop {
+    from {
+        transform: translateY(-60px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FIRERED AUTHENTIC BATTLE SCREEN  —  .frb-* namespace
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Root overlay — full-screen dim backdrop ─────────────────────────── */
+.frb-root {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+/*
+ * frb-wrap — sized by grass.jpg (240 wide) + UI bar (240×48)
+ *  = total GBA screen 240×160.
+ * No fixed aspect-ratio here; the grass <img> drives the field height
+ * and the frb-bottom sits below it in normal flow.
+ */
+.frb-wrap {
+    position: relative;
+    width: min(96vw, 960px);
+    font-family: "Pokemon Fire Red", "Press Start 2P", monospace;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    /* border so it stands out against the dim backdrop */
+    outline: 3px solid #304820;
+}
+
+/* Entrance flash covers the whole wrap (field + bottom) ─────────────── */
+.frb-flash {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    animation: frb-flash-anim 1.6s steps(1) forwards;
+    z-index: 999;
+}
+
+@keyframes frb-flash-anim {
+    0% {
+        background: #ffffff;
+    }
+
+    14% {
+        background: #000000;
+    }
+
+    28% {
+        background: #ffffff;
+    }
+
+    42% {
+        background: #000000;
+    }
+
+    56% {
+        background: #ffffff;
+    }
+
+    70% {
+        background: #000000;
+    }
+
+    85% {
+        background: #ffffff;
+    }
+
+    100% {
+        background: transparent;
+    }
+}
+
+/*
+ * frb-field — normal-flow block; its height is driven by frb-field-bg.
+ * All overlaid elements (sprites, status boxes) are position:absolute
+ * inside here, using % values relative to the natural image height.
+ */
+.frb-field {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+    /* allow status boxes to bleed if needed */
+}
+
+/* The actual grass.jpg image — determines the field height at all widths */
+.frb-field-bg {
+    display: block;
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* ── Enemy status box — upper-left ─────────────────────────────────── */
+.frb-enemy-status {
+    position: absolute;
+    top: 4%;
+    left: 1%;
+    /* ~38% of field width. At 960px: ~365px → height ≈ 120px */
+    width: clamp(130px, 38%, 240px);
+    aspect-ratio: 412 / 136;
+    z-index: 6;
+    pointer-events: none;
+    transition:
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.65s ease-out;
+}
+
+.frb-status-out-left {
+    transform: translateX(-140%);
+    opacity: 0;
+}
+
+.frb-status-out-right {
+    transform: translateX(140%);
+    opacity: 0;
+}
+
+.frb-status-in {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* ── Enemy Pokémon area — upper-right ──────────────────────────────── */
+.frb-enemy-area {
+    position: absolute;
+    /* grass.jpg upper-right open area (sky/field zone) */
+    top: 0%;
+    right: 12%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(140%);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 3;
+}
+
+.frb-enemy-area.frb-enemy-in {
+    transform: translateX(0);
+}
+
+.frb-enemy-sprite {
+    /* sprites are 96×96px from PokeAPI; display at ~4× the GBA size */
+    width: clamp(128px, 35vw, 300px);
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
+
+.frb-enemy-sprite.frb-faint {
+    opacity: 0;
+    transform: translateY(32px);
+}
+
+/* Shiny golden sparkle */
+.frb-enemy-sprite.frb-shiny {
+    filter: drop-shadow(0 0 6px #f8d800) drop-shadow(0 0 14px #f8d800) drop-shadow(2px 6px 4px rgba(0, 0, 0, 0.3));
+    animation: frb-shiny-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes frb-shiny-pulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 4px #f8d800) drop-shadow(2px 6px 4px rgba(0, 0, 0, 0.3));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 12px #ffe84a) drop-shadow(0 0 22px #f8d800) drop-shadow(2px 6px 4px rgba(0, 0, 0, 0.3));
+    }
+}
+
+.frb-shiny-star {
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(12px, 3vw, 20px);
+    color: #f8d800;
+    text-shadow:
+        0 0 6px #f8a800,
+        0 0 12px #f8d800;
+    animation: frb-star-spin 2s linear infinite;
+    z-index: 7;
+    pointer-events: none;
+}
+
+@keyframes frb-star-spin {
+    0% {
+        transform: translateX(-50%) rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: translateX(-50%) rotate(180deg) scale(1.3);
+    }
+
+    100% {
+        transform: translateX(-50%) rotate(360deg) scale(1);
+    }
+}
+
+/* ── Player area — lower-left (on the grass terrain) ────────────────── */
+.frb-player-area {
+    position: absolute;
+    /* grass.jpg: green terrain is in the lower portion of the image */
+    bottom: 8%;
+    left: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 3;
+}
+
+/* Trainer sprite (background-image set inline from JS) */
+.frb-trainer {
+    display: block;
+    filter: drop-shadow(2px 6px 4px rgba(0, 0, 0, 0.3));
+    margin-bottom: -4px;
+}
+
+/* Pokeball arc */
+.frb-pokeball {
+    position: absolute;
+    bottom: 40px;
+    /* start roughly near trainer's hand */
+    left: 40px;
+    width: clamp(16px, 4vw, 28px);
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    animation: frb-ball-arc 1s cubic-bezier(0.3, 0, 0.4, 1) forwards;
+}
+
+@keyframes frb-ball-arc {
+    0% {
+        transform: translate(0px, 0px) rotate(0deg) scale(1.1);
+        opacity: 1;
+    }
+
+    35% {
+        transform: translate(40px, -80px) rotate(180deg) scale(0.9);
+        opacity: 1;
+    }
+
+    70% {
+        transform: translate(90px, -40px) rotate(290deg) scale(0.75);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(150px, 80px) rotate(370deg) scale(0.2);
+        opacity: 0;
+    }
+}
+
+/* Player Pokémon sprite */
+.frb-player-sprite {
+    width: clamp(140px, 28vw, 320px);
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    margin-bottom: -110px;
+    margin-left: 80px;
+}
+
+.frb-player-sprite.frb-emerge {
+    animation: frb-emerge 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes frb-emerge {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    55% {
+        transform: scale(1.18);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ── Player status box — lower-right ───────────────────────────────── */
+.frb-player-status {
+    position: absolute;
+    bottom: 3%;
+    right: 1%;
+    /* narrower to stay within field bounds */
+    width: clamp(140px, 40%, 250px);
+    aspect-ratio: 440 / 172;
+    z-index: 6;
+    pointer-events: none;
+    transition:
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.65s ease-out;
+}
+
+/* Shared: the PNG frame image fills the container */
+.frb-ui-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    pointer-events: none;
+}
+
+/* Pokémon name overlay ──────────────────────────────────────────────── */
+.frb-name {
+    position: absolute;
+    font-family: "Pokemon Fire Red", "Press Start 2P", monospace;
+    color: #282820;
+    white-space: nowrap;
+    line-height: 1;
+    z-index: 2;
+}
+
+.frb-enemy-name {
+    top: 24%;
+    left: 9%;
+    /* cap size so name doesn't overflow the box */
+    font-size: clamp(6px, 1.6vw, 11px);
+    max-width: 58%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.frb-player-name {
+    top: 28%;
+    left: 15%;
+    font-size: clamp(6px, 1.6vw, 11px);
+    max-width: 58%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Level overlay ─────────────────────────────────────────────────────── */
+.frb-level {
+    position: absolute;
+    font-family: "Pokemon Fire Red", "Press Start 2P", monospace;
+    color: #282820;
+    white-space: nowrap;
+    line-height: 1;
+    z-index: 2;
+}
+
+/* Level number only (PNG already has "Lv" label) */
+.frb-enemy-level {
+    top: 28%;
+    right: 12%;
+    font-size: clamp(6px, 1.6vw, 11px);
+}
+
+.frb-player-level {
+    top: 30%;
+    right: 8%;
+    font-size: clamp(6px, 1.6vw, 11px);
+}
+
+/* HP bar overlaid on the PNG track ─────────────────────────────────── */
+.frb-hp-track {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 2px;
+    z-index: 2;
+}
+
+/* HP bar fill positions — calibrated to opponent_pokemon_detail.png (412×136) */
+.frb-enemy-hp-track {
+    top: 55%;
+    left: 40%;
+    width: 45%;
+    height: 8%;
+}
+
+/* HP bar fill positions — calibrated to own_pokemon_detail.png (440×172) */
+.frb-player-hp-track {
+    top: 53%;
+    left: 46%;
+    width: 43%;
+    height: 6.5%;
+}
+
+.frb-hp-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition:
+        width 0.55s ease-out,
+        background-color 0.3s ease;
+}
+
+/* HP numbers (own Pokémon) */
+.frb-hp-nums {
+    position: absolute;
+    top: 70%;
+    right: 10%;
+    font-family: "Pokemon Fire Red", "Press Start 2P", monospace;
+    font-size: clamp(6px, 1.7vw, 11px);
+    color: #282820;
+    line-height: 1;
+    z-index: 2;
+}
+
+/* EXP bar (own Pokémon) */
+.frb-exp-track {
+    position: absolute;
+    top: 88%;
+    left: 31%;
+    width: 60%;
+    height: 5%;
+    background: #404850;
+    overflow: hidden;
+    border-radius: 2px;
+    z-index: 2;
+}
+
+.frb-exp-fill {
+    height: 100%;
+    background: #5890f0;
+    border-radius: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   BOTTOM UI — message box + action menu
+   ══════════════════════════════════════════════════════════════════════ */
+
+/*
+ * frb-bottom — normal-flow, sits BELOW the grass image.
+ * aspect-ratio 240:48 = 5:1 mirrors the GBA UI bar proportions
+ * so the bottom bar scales with the container width.
+ */
+.frb-bottom {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 240 / 48;
+    display: flex;
+    align-items: stretch;
+    z-index: 10;
+}
+
+/* Message / narration box */
+.frb-msg-wrap {
+    position: relative;
+    flex: 58;
+    overflow: hidden;
+}
+
+.frb-msg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.frb-msg-text {
+    position: absolute;
+    /* Inset defines the bounding box exactly within the dark area of what_will_pokemon_do.png */
+    inset: 12% 8% 4% 6%;
+    padding: 0;
+    margin: 0;
+    font-family: "Pokemon Fire Red", "Press Start 2P", monospace;
+    /* scale with vw so text matches the image at all widths */
+    font-size: clamp(8px, 2.4vw, 18px);
+    color: #e8e4cc;
+    /* light cream — inside the dark blue box in the PNG */
+    line-height: 1.5;
+    white-space: pre-line;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Action menu */
+.frb-action-wrap {
+    position: relative;
+    flex: 42;
+    overflow: hidden;
+}
+
+.frb-action-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.frb-action-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.frb-zone-btn {
+    position: absolute;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.frb-zone-btn:disabled {
+    cursor: default;
+}
+
+.frb-cursor-el {
+    position: absolute;
+    font-family: "Pokemon Fire Red", "Press Start 2P", monospace;
+    font-size: clamp(8px, 2.2vw, 14px);
+    color: #282820;
+    pointer-events: none;
+    z-index: 3;
+    line-height: 1;
+}
+
+.frb-action-overlay[data-action="0"] .frb-cursor-el {
+    top: 26%;
+    left: 10%;
+}
+
+.frb-action-overlay[data-action="1"] .frb-cursor-el {
+    top: 26%;
+    left: 56%;
+}
+
+.frb-action-overlay[data-action="2"] .frb-cursor-el {
+    top: 62%;
+    left: 6%;
+}
+
+.frb-action-overlay[data-action="3"] .frb-cursor-el {
+    top: 62%;
+    left: 56%;
+}
+
+/* Responsive — everything scales naturally since sprites/boxes use vw/% */
+@media (max-width: 600px) {
+    .frb-wrap {
+        width: 100vw;
+        outline: none;
+    }
+
+    .frb-cursor-el {
+        font-size: clamp(7px, 3vw, 12px);
+    }
+
+    .frb-msg-text {
+        font-size: clamp(6px, 2.4vw, 10px);
+    }
+}
+
+/* --- Battle Mechanic UI --- */
+.frb-moves-overlay {
+    position: absolute;
+    inset: 12px;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.frb-move-btn {
+    position: relative;
+    background: transparent;
+    border: none;
+    font-family: "Pokemon Fire Red", "Press Start 2P", monospace;
+    font-size: clamp(8px, 2.2vw, 16px);
+    text-align: left;
+    padding-left: 20px;
+    cursor: pointer;
+    color: #282820;
+}
+
+.frb-move-cursor {
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(8px, 1.8vw, 14px);
+    color: #282820;
+}
+
+.frb-flash-sprite {
+    animation: sprite-flash 0.2s alternate 2;
+}
+
+@keyframes sprite-flash {
+    0% {
+        opacity: 1;
+        filter: invert(0);
+    }
+
+    100% {
+        opacity: 0;
+        filter: invert(1);
+    }
+}
+
+.shake-1 {
+    animation: poke-shake 0.5s ease-in-out;
+}
+
+.shake-2 {
+    animation: poke-shake 0.5s ease-in-out;
+}
+
+.shake-3 {
+    animation: poke-shake 0.5s ease-in-out;
+}
+
+@keyframes poke-shake {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-15deg) translateY(-5px);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(15deg) translateY(-5px);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   POKéMON SELECTION VIEW (DYNAMIC MENU)
+   ═══════════════════════════════════════════════ */
+
+.psv-root {
+    /* Use a smart width calculation to maintain exact 3:2 aspect ratio without overflowing the viewport */
+    width: min(90vw, 135vh, 800px);
+    aspect-ratio: 960 / 640;
+    /* Enforce strict aspect ratio so content doesn't stretch it */
+    min-height: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: "Press Start 2P", monospace;
+    background-image: url('/assets/ui/Pokemon_selection.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+    padding: 12px;
+    box-sizing: border-box;
+    /* 2-3 color game borders */
+    border: 4px solid #f0f0f0;
+    box-shadow:
+        0 0 0 4px #606060,
+        0 0 0 8px #202020;
+    border-radius: 4px;
+    margin: 16px;
+    /* give space for the borders and button */
+}
+
+.psv-close {
+    position: absolute;
+    /* Placed perfectly overlapping the dark outer border */
+    top: -18px;
+    right: -18px;
+    background: #c83838;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* TOP BANNER using Information_display.png (960x192) */
+.psv-top-banner {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 960 / 192;
+    background-image: url('/assets/ui/Information_display.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    display: flex;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.psv-top-left {
+    flex: 1.2;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.psv-top-right {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    /* [TWEAK LOCATION]: Adjust padding-left to push text left or right in the right box */
+    padding-left: 190px;
+    padding-top: 8px;
+}
+
+/* Text styles inside banner */
+.psv-banner-title {
+    font-size: 14px;
+    color: #202020;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.psv-banner-summary {
+    font-size: 8px;
+    line-height: 1.6;
+    color: #383838;
+}
+
+.psv-banner-level {
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: #202020;
+}
+
+.psv-types {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.psv-type-badge {
+    padding: 4px 8px;
+    font-size: 8px;
+    color: white;
+    border-radius: 4px;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.psv-status {
+    margin-top: 8px;
+}
+
+.psv-tag-party {
+    background: #50a060;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 9px;
+}
+
+.psv-tag-pc {
+    background: #4078c0;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 9px;
+}
+
+/* CENTER STAGE */
+.psv-center-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+    min-height: 0;
+}
+
+.psv-arrow {
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: #505050;
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.1s;
+}
+
+.psv-arrow:active {
+    transform: scale(0.9);
+}
+
+.psv-sprite-wrap {
+    position: relative;
+    /* [TWEAK LOCATION]: Adjust wrap width/height slightly larger than the sprite */
+    width: 240px;
+    height: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* [TWEAK LOCATION]: Adjust margin-top to push Pokémon up or down to align with the stage shadow */
+    margin-top: 0px;
+}
+
+.psv-sprite {
+    /* [TWEAK LOCATION]: Adjust width/height to make Pokémon larger or smaller */
+    width: 240px;
+    height: 240px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0px 8px 0px rgba(0, 0, 0, 0.2));
+}
+
+.psv-counter {
+    position: absolute;
+    bottom: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 10px;
+}
+
+/* BOTTOM MENU using move_options.png (500x212) */
+.psv-bottom-menu {
+    /* [TWEAK LOCATION]: Adjust width percentage to make the bottom menu smaller or larger */
+    width: 700px;
+    align-self: center;
+    height: 130px;
+    aspect-ratio: 5/2;
+    background-image: url('/assets/battle/move_options.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: -10px;
+}
+
+.psv-menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 32px;
+    width: 80%;
+    height: 80%;
+}
+
+.psv-menu-grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.psv-menu-btn {
+    position: relative;
+    background: transparent;
+    border: none;
+    font-family: "Pokemon Fire Red", "Press Start 2P", monospace;
+    font-size: clamp(8px, 2vw, 14px);
+    text-align: left;
+    padding-left: 16px;
+    cursor: pointer;
+    color: #282820;
+    display: flex;
+    align-items: center;
+}
+
+.psv-menu-btn:hover::before {
+    content: "▶";
+    position: absolute;
+    left: -4px;
+    font-size: clamp(8px, 1.8vw, 14px);
+}
+
+.psv-empty {
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #404040;
+}
+
+.psv-empty button {
+    margin-top: 16px;
+    font-family: "Press Start 2P", monospace;
+    padding: 8px 16px;
+}
+
+/* ── Portfolio Overlay ── */
+.portfolio-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.portfolio-container {
+    position: relative;
+    width: 90vw;
+    max-width: 800px;
+    height: auto;
+    aspect-ratio: 4/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.portfolio-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.portfolio-content {
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    width: 80%;
+    height: 60%;
+    color: #404040;
+    font-family: "Press Start 2P", monospace;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    text-shadow: 1px 1px 0px #fff;
+    line-height: 1.6;
+}
+
+.portfolio-content h2 {
+    font-size: clamp(10px, 1.8vw, 20px);
+    margin-top: 0;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #a0a0a0;
+    padding-bottom: 5px;
+}
+
+.portfolio-content p {
+    font-size: clamp(8px, 1.0vw, 12px);
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+.page-indicator {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    font-size: 10px;
+    color: #666;
+}
+
+.portfolio-btn {
+    position: absolute;
+    z-index: 10;
+}
+
+.next-btn {
+    top: 6%;
+    right: 6%;
+    width: 15%;
+    height: 10%;
+}
+
+.back-btn {
+    top: 6%;
+    left: 6%;
+    width: 15%;
+    height: 10%;
+}
+
+.close-btn {
+    top: 0%;
+    right: 0%;
+    width: 40px;
+    height: 40px;
+    background: #e74c3c;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    border: 2px solid white;
+    transform: translate(30%, -30%);
+}
+.close-btn:hover {
+    background: #c0392b;
+}
