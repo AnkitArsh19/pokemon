@@ -88,6 +88,9 @@ export default function MenuOverlay() {
             <button className="main-menu-item" onClick={() => { gameState.save(); close(); }}>
               <img src="./assets/icons/boite_jetons.png" className="mm-icon-img" alt="" /> SAVE
             </button>
+            <button className="main-menu-item" onClick={() => window.location.reload()}>
+              <img src="./assets/icons/lumiere_argile.png" className="mm-icon-img" alt="" /> REFRESH
+            </button>
             <button className="main-menu-item" onClick={close}>
               <img src="./assets/icons/corte_sortie.png" className="mm-icon-img" alt="" /> CLOSE
             </button>

@@ -287,15 +287,6 @@ export default function StarterSelect() {
   if (!visible) return null;
 
   const handleStartGame = () => {
-    // Attempt landscape lock
-    if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen().then(() => {
-        if (window.screen && window.screen.orientation && window.screen.orientation.lock) {
-          window.screen.orientation.lock('landscape').catch(() => {});
-        }
-      }).catch(() => {});
-    }
-
     setPhase('cinematic');
     setCinematicStep('frames');
     setCinematicFrame(0);
