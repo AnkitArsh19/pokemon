@@ -1,4 +1,4 @@
-# DevTown — A Pokémon FireRed Portfolio
+# A Pokémon FireRed Portfolio
 
 A full-stack portfolio disguised as a functioning Pokémon FireRed replica.
 
