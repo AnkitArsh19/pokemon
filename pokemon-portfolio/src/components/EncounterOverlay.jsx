@@ -54,7 +54,7 @@ function rollWildPokemon(leadLevel = 5) {
 
 // ── Trainer throw spritesheet config ─────────────────────────────────────
 const THROW_SHEET = {
-  src: "/assets/battle/ball_throwing_spritesheet.png",
+  src: "./assets/battle/ball_throwing_spritesheet.png",
   totalW: 1216,
   totalH: 236,
   frameCount: 5,
@@ -556,10 +556,10 @@ export default function EncounterOverlay() {
         {phase !== P.FLASH && (
           <>
             <div className="frb-field">
-              <img src="/assets/battle/grass.jpg" className="frb-field-bg" alt="" draggable={false} />
+              <img src="./assets/battle/grass.jpg" className="frb-field-bg" alt="" draggable={false} />
               
               <div className={`frb-enemy-status ${showUI ? "frb-status-in" : "frb-status-out-left"}`}>
-                <img src="/assets/battle/opponent_pokemon_detail.png" className="frb-ui-img" alt="" draggable={false} />
+                <img src="./assets/battle/opponent_pokemon_detail.png" className="frb-ui-img" alt="" draggable={false} />
                 <span className="frb-name frb-enemy-name">
                   {wild.isShiny ? "★ " : ""}
                   {wild.name}
@@ -584,7 +584,7 @@ export default function EncounterOverlay() {
               {/* Pokeball catching animation */}
               {phase === P.CATCHING && pokeballShake > 0 && (
                 <div className={`frb-enemy-area frb-enemy-in`}>
-                  <img src="/assets/battle/pokeball.png" alt="" className={`frb-catch-ball shake-${pokeballShake}`} draggable={false} style={{ width: '40px', marginTop: '100px'}} />
+                  <img src="./assets/battle/pokeball.png" alt="" className={`frb-catch-ball shake-${pokeballShake}`} draggable={false} style={{ width: '40px', marginTop: '100px'}} />
                 </div>
               )}
 
@@ -592,7 +592,7 @@ export default function EncounterOverlay() {
                 {showTrainer && (
                   <div className="frb-trainer" style={{ width: `${THROW_SHEET.displayW}px`, height: `${THROW_SHEET.displayH}px`, backgroundImage: `url(${THROW_SHEET.src})`, backgroundSize: `${THROW_SHEET.bgW}px ${THROW_SHEET.displayH}px`, backgroundPosition: trainerBgPos, backgroundRepeat: "no-repeat", imageRendering: "pixelated" }} />
                 )}
-                {showBall && <img src="/assets/battle/pokeball.png" alt="" className="frb-pokeball" draggable={false} />}
+                {showBall && <img src="./assets/battle/pokeball.png" alt="" className="frb-pokeball" draggable={false} />}
                 {showPlayer && plyrSprite && (
                   <img src={plyrSprite} alt={lead?.name} className={`frb-player-sprite ${isEmerging ? "frb-emerge" : ""} ${playerFlash ? "frb-flash-sprite" : ""}`} draggable={false} />
                 )}
@@ -600,7 +600,7 @@ export default function EncounterOverlay() {
 
               {lead && (
                 <div className={`frb-player-status ${showUI ? "frb-status-in" : "frb-status-out-right"}`}>
-                  <img src="/assets/battle/own_pokemon_detail.png" className="frb-ui-img" alt="" draggable={false} />
+                  <img src="./assets/battle/own_pokemon_detail.png" className="frb-ui-img" alt="" draggable={false} />
                   <span className="frb-name frb-player-name">{lead.name}</span>
                   <span className="frb-level frb-player-level">{lead.level}</span>
                   <div className="frb-hp-track frb-player-hp-track">
@@ -616,7 +616,7 @@ export default function EncounterOverlay() {
 
             <div className="frb-bottom">
               <div className="frb-msg-wrap">
-                <img src="/assets/battle/what_will_pokemon_do.png" className="frb-msg-img" alt="" draggable={false} />
+                <img src="./assets/battle/what_will_pokemon_do.png" className="frb-msg-img" alt="" draggable={false} />
                 <p className="frb-msg-text">
                   {phase === P.MENU || phase === P.FIGHT_MENU ? `What will\n${lead?.name || "POKEMON"} do?` : message}
                 </p>
@@ -624,7 +624,7 @@ export default function EncounterOverlay() {
 
               {phase === P.MENU && (
                 <div className="frb-action-wrap">
-                  <img src="/assets/battle/battle_options.png" className="frb-action-img" alt="" draggable={false} />
+                  <img src="./assets/battle/battle_options.png" className="frb-action-img" alt="" draggable={false} />
                   <div className="frb-action-overlay" data-action={selectedAct}>
                     <button className="frb-zone-btn" style={{ top: "8%", left: "2%", width: "46%", height: "42%" }} onClick={() => doMainMenuAction(0)} tabIndex={-1} aria-label="FIGHT" />
                     <button className="frb-zone-btn" style={{ top: "8%", right: "2%", width: "40%", height: "42%" }} onClick={() => doMainMenuAction(1)} tabIndex={-1} aria-label="BAG" />
@@ -637,7 +637,7 @@ export default function EncounterOverlay() {
 
               {phase === P.FIGHT_MENU && (
                 <div className="frb-action-wrap">
-                  <img src="/assets/battle/move_options.png" className="frb-action-img" alt="" draggable={false} />
+                  <img src="./assets/battle/move_options.png" className="frb-action-img" alt="" draggable={false} />
                   <div className="frb-moves-overlay" data-action={selectedAct}>
                     {lead?.moves?.map((move, idx) => (
                       <button key={idx} className="frb-move-btn" onClick={() => executeMove(idx)} tabIndex={-1}>

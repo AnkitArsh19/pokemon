@@ -3,48 +3,49 @@ import gameState from '../data/gameState';
 import EventBus from '../game/EventBus';
 import audioManager from '../data/audioManager';
 import SpriteSheetFrame from './SpriteSheetFrame';
+import './LoadingStyles.css';
 
 const INTRO_BG_FRAMES = [
-  '/assets/intro/intro_bg_1.png',
-  '/assets/intro/intro_bg_2.png',
-  '/assets/intro/intro_bg_3.png',
-  '/assets/intro/intro_bg_4.png',
-  '/assets/intro/intro_bg_5.png',
-  '/assets/intro/intro_bg_6.png',
+  './assets/intro/intro_bg_1.png',
+  './assets/intro/intro_bg_2.png',
+  './assets/intro/intro_bg_3.png',
+  './assets/intro/intro_bg_4.png',
+  './assets/intro/intro_bg_5.png',
+  './assets/intro/intro_bg_6.png',
 ];
 
 const CINEMATIC_SCENE = {
-  battleBg: '/assets/intro/intro_gengar_nidorino_bg.png',
-  grass: '/assets/intro/intro_gengar_nidorino_grass.png',
-  gengar: '/assets/intro/intro_gengar_nidorino_gengar.png',
-  nidorino: '/assets/intro/intro_gengar_nidorino_nidorino.png',
+  battleBg: './assets/intro/intro_gengar_nidorino_bg.png',
+  grass: './assets/intro/intro_gengar_nidorino_grass.png',
+  gengar: './assets/intro/intro_gengar_nidorino_gengar.png',
+  nidorino: './assets/intro/intro_gengar_nidorino_nidorino.png',
 };
 
 const CINEMATIC_RISE_SCENE = {
-  bg: '/assets/intro/intro_gengar_nidorino_nidorino_bg_down.png',
-  gengarUp: '/assets/intro/intro_gengar_nidorino_gengar_up.png',
+  bg: './assets/intro/intro_gengar_nidorino_nidorino_bg_down.png',
+  gengarUp: './assets/intro/intro_gengar_nidorino_gengar_up.png',
 };
 
 const CINEMATIC_BATTLE_SCENE = {
-  bg: '/assets/intro/battle_bg.png',
-  gengarFrames: '/assets/intro/battle_gengar_frames.png',
-  gengarAttacks: '/assets/intro/battle_gengar_attacks.png',
-  nidorinoFrames: '/assets/intro/battle_nidorino_frames.png',
-  nidorinoEffects: '/assets/intro/battle_nidorino_effects.png',
-  grass: '/assets/intro/battle_grass_moving.png',
+  bg: './assets/intro/battle_bg.png',
+  gengarFrames: './assets/intro/battle_gengar_frames.png',
+  gengarAttacks: './assets/intro/battle_gengar_attacks.png',
+  nidorinoFrames: './assets/intro/battle_nidorino_frames.png',
+  nidorinoEffects: './assets/intro/battle_nidorino_effects.png',
+  grass: './assets/intro/battle_grass_moving.png',
 };
 
 const START_SCREEN_FLAME_SPRITES = Array.from(
   { length: 10 },
-  (_, index) => `/assets/intro/start_screen_flame_${String(index + 1).padStart(2, '0')}.png`,
+  (_, index) => `./assets/intro/start_screen_flame_${String(index + 1).padStart(2, '0')}.png`,
 );
 
 const START_SCREEN_TITLE = 'PORTFOLIO'.split('');
 
 const START_SCREEN_SCENE = {
-  initial: '/assets/intro/start_screen_initial.png',
-  bg: '/assets/intro/start_screen_bg.png',
-  charizard: '/assets/intro/start_screen_charizard.png',
+  initial: './assets/intro/start_screen_initial.png',
+  bg: './assets/intro/start_screen_bg.png',
+  charizard: './assets/intro/start_screen_charizard.png',
   flames: START_SCREEN_FLAME_SPRITES,
 };
 
@@ -107,7 +108,8 @@ const imageExists = (src) => new Promise((resolve) => {
 
 export default function StarterSelect() {
   const [visible, setVisible] = useState(!gameState.hasSelectedStarter);
-  const [phase, setPhase] = useState('cinematic');
+  const [phase, setPhase] = useState('loading');
+  const [loadingPercentage, setLoadingPercentage] = useState(0);
   const [cinematicFrame, setCinematicFrame] = useState(0);
   const [cinematicStep, setCinematicStep] = useState('frames');
   const [battleScene, setBattleScene] = useState('idle');
@@ -126,7 +128,8 @@ export default function StarterSelect() {
   useEffect(() => {
     const unsub = EventBus.on('playIntro', () => {
       setVisible(true);
-      setPhase('cinematic');
+      setPhase('loading');
+      setLoadingPercentage(0);
       setCinematicStep('frames');
       setCinematicFrame(0);
       EventBus.emit('blockInput');
@@ -158,15 +161,17 @@ export default function StarterSelect() {
         ...START_SCREEN_SCENE.flames,
       ];
 
-      Promise.all(requiredAssets.map(imageExists)).then((results) => {
-        const ready = results.every(Boolean);
-        if (ready) {
-          setPhase('cinematic');
-          setCinematicStep('frames');
-          setCinematicFrame(0);
-        } else {
-          enterMap();
-        }
+      let loaded = 0;
+      setLoadingPercentage(0);
+      setPhase('loading');
+
+      requiredAssets.forEach((src) => {
+        const img = new Image();
+        img.onload = img.onerror = () => {
+          loaded++;
+          setLoadingPercentage(Math.floor((loaded / requiredAssets.length) * 100));
+        };
+        img.src = src;
       });
     }
   }, []);
@@ -281,6 +286,27 @@ export default function StarterSelect() {
 
   if (!visible) return null;
 
+  const handleStartGame = () => {
+    // Attempt landscape lock
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().then(() => {
+        if (window.screen && window.screen.orientation && window.screen.orientation.lock) {
+          window.screen.orientation.lock('landscape').catch(() => {});
+        }
+      }).catch(() => {});
+    }
+
+    setPhase('cinematic');
+    setCinematicStep('frames');
+    setCinematicFrame(0);
+    
+    // Emit event so BootScene can lazy load everything else
+    EventBus.emit('beginLazyLoad');
+    
+    // Preload audio files in background
+    audioManager.preloadAll();
+  };
+
   const handleCinematicClick = () => {
     if (cinematicStep === 'start') {
       enterMap();
@@ -289,6 +315,25 @@ export default function StarterSelect() {
 
   return (
     <div className="starter-overlay">
+      {phase === 'loading' && (
+        <div className="loading-screen-wrap">
+          {loadingPercentage < 100 ? (
+            <div className="loading-content">
+              <h2>LOADING...</h2>
+              <div className="loading-bar-border">
+                <div className="loading-bar-fill" style={{ width: `${loadingPercentage}%` }} />
+              </div>
+              <p>{loadingPercentage}%</p>
+            </div>
+          ) : (
+            <div className="start-content">
+              <button className="start-button" onClick={handleStartGame}>START GAME</button>
+              <p className="desktop-hint">Desktop is recommended for the best experience.</p>
+            </div>
+          )}
+        </div>
+      )}
+
       {phase === 'cinematic' && (
         <div className="starter-cinematic" onClick={handleCinematicClick}>
           {cinematicStep === 'frames' && (

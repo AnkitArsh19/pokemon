@@ -18,12 +18,29 @@
 
 
 /* ── Game Container ── */
-.game-app {
+.game-app-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
+    background: #000;
+}
+
+.game-app {
     position: relative;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     background: #000;
+}
+
+/* Apply 3:2 ratio constraints ONLY on portrait screens (mobile fallback) */
+@media (orientation: portrait) {
+    .game-app {
+        max-width: calc(100vh * 3 / 2);
+        max-height: calc(100vw * 2 / 3);
+    }
 }
 
 #game-container {

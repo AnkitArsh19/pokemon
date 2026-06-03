@@ -34,31 +34,31 @@ export default class BootScene extends Phaser.Scene {
     });
 
     // ── Load tileset & map ──
-    this.load.image('tiles', '/assets/map/tileset.png');
-    this.load.tilemapTiledJSON('map', '/assets/map/town.json');
+    this.load.image('tiles', './assets/map/tileset.png');
+    this.load.tilemapTiledJSON('map', './assets/map/town.json');
 
     // ── Load character spritesheets (18×22 px frames, same as pokevue) ──
-    this.load.spritesheet('player', '/assets/sprites/player.png', {
+    this.load.spritesheet('player', './assets/sprites/player.png', {
       frameWidth: 18,
       frameHeight: 22,
     });
-    this.load.spritesheet('player_girl', '/assets/sprites/player_girl.png', {
+    this.load.spritesheet('player_girl', './assets/sprites/player_girl.png', {
       frameWidth: 18,
       frameHeight: 22,
     });
-    this.load.spritesheet('prof_chen', '/assets/sprites/prof_chen.png', {
+    this.load.spritesheet('prof_chen', './assets/sprites/prof_chen.png', {
       frameWidth: 18,
       frameHeight: 22,
     });
 
     // ── Interior tileset ──
-    this.load.image('oak_lab', '/assets/map/Oak_lab.png');
-    this.load.image('red_house', '/assets/map/Red_house_ground_floor.png');
-    this.load.image('interior_1', '/assets/map/interior_1.png');
-    this.load.image('interior_2', '/assets/map/interior_2.png');
-    this.load.image('interior_3', '/assets/map/interior_3.png');
-    this.load.image('interior_4', '/assets/map/interior_4.png');
-    this.load.image('interior_5', '/assets/map/interior_5.png');
+    this.load.image('oak_lab', './assets/map/Oak_lab.png');
+    this.load.image('red_house', './assets/map/Red_house_ground_floor.png');
+    this.load.image('interior_1', './assets/map/interior_1.png');
+    this.load.image('interior_2', './assets/map/interior_2.png');
+    this.load.image('interior_3', './assets/map/interior_3.png');
+    this.load.image('interior_4', './assets/map/interior_4.png');
+    this.load.image('interior_5', './assets/map/interior_5.png');
   }
 
   create() {

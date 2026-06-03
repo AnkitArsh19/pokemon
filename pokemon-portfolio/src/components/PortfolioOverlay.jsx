@@ -210,7 +210,7 @@ export default function PortfolioOverlay() {
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the box itself
       >
         <img
-          src="/assets/ui/information_screen.png"
+          src="./assets/ui/information_screen.png"
           alt="Information Screen"
           className="portfolio-bg"
         />

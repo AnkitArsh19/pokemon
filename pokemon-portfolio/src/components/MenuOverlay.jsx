@@ -62,34 +62,34 @@ export default function MenuOverlay() {
         <div className="main-menu-panel" onClick={e => e.stopPropagation()}>
           <div className="main-menu-list">
             <button className="main-menu-item" onClick={() => openSection('pokemon')}>
-              <img src="/assets/icons/poke_ball.png" className="mm-icon-img" alt="" /> POKéMON
+              <img src="./assets/icons/poke_ball.png" className="mm-icon-img" alt="" /> POKéMON
             </button>
             <button className="main-menu-item" onClick={() => openSection('pokedex')}>
-              <img src="/assets/icons/album_photo.png" className="mm-icon-img" alt="" /> POKéDEX
+              <img src="./assets/icons/album_photo.png" className="mm-icon-img" alt="" /> POKéDEX
             </button>
             <button className="main-menu-item" onClick={() => openSection('controls')}>
-              <img src="/assets/icons/musique_gb.png" className="mm-icon-img" alt="" /> CONTROLS
+              <img src="./assets/icons/musique_gb.png" className="mm-icon-img" alt="" /> CONTROLS
             </button>
             <button className="main-menu-item" onClick={() => openSection('options')}>
-              <img src="/assets/icons/cherch_objet.png" className="mm-icon-img" alt="" /> OPTIONS
+              <img src="./assets/icons/cherch_objet.png" className="mm-icon-img" alt="" /> OPTIONS
             </button>
             <button className="main-menu-item" onClick={() => openSection('houses')}>
-              <img src="/assets/icons/carte_magnetique.png" className="mm-icon-img" alt="" /> HOUSES
+              <img src="./assets/icons/carte_magnetique.png" className="mm-icon-img" alt="" /> HOUSES
             </button>
             <button className="main-menu-item" onClick={() => openSection('tips')}>
-              <img src="/assets/icons/cherch_objet.png" className="mm-icon-img" alt="" /> TIPS
+              <img src="./assets/icons/cherch_objet.png" className="mm-icon-img" alt="" /> TIPS
             </button>
             <button className="main-menu-item" onClick={() => { close(); EventBus.emit('playIntro'); }}>
-              <img src="/assets/icons/album_photo.png" className="mm-icon-img" alt="" /> INTRO
+              <img src="./assets/icons/album_photo.png" className="mm-icon-img" alt="" /> INTRO
             </button>
             <button className="main-menu-item" onClick={() => openSection('contact')}>
-              <img src="/assets/icons/carte_magnetique.png" className="mm-icon-img" alt="" /> CONTACT
+              <img src="./assets/icons/carte_magnetique.png" className="mm-icon-img" alt="" /> CONTACT
             </button>
             <button className="main-menu-item" onClick={() => { gameState.save(); close(); }}>
-              <img src="/assets/icons/boite_jetons.png" className="mm-icon-img" alt="" /> SAVE
+              <img src="./assets/icons/boite_jetons.png" className="mm-icon-img" alt="" /> SAVE
             </button>
             <button className="main-menu-item" onClick={close}>
-              <img src="/assets/icons/corte_sortie.png" className="mm-icon-img" alt="" /> CLOSE
+              <img src="./assets/icons/corte_sortie.png" className="mm-icon-img" alt="" /> CLOSE
             </button>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function MenuOverlay() {
         <div className="menu-panel custom-scrollbar" onClick={e => e.stopPropagation()} style={{ width: '380px', maxHeight: '80vh', overflowY: 'auto', padding: '16px' }}>
           <div className="menu-header" style={{ marginBottom: '16px' }}>
             <span className="menu-title">
-              <img src="/assets/icons/carte_magnetique.png" className="mm-icon-img" alt="" /> HOUSES
+              <img src="./assets/icons/carte_magnetique.png" className="mm-icon-img" alt="" /> HOUSES
             </span>
             <button className="menu-close" onClick={() => setSection('main')}>←</button>
           </div>
@@ -142,7 +142,7 @@ export default function MenuOverlay() {
                 onMouseOver={(e) => e.currentTarget.style.background = '#e8f0e8'}
                 onMouseOut={(e) => e.currentTarget.style.background = '#fff'}
               >
-                <img src="/assets/icons/carte_magnetique.png" className="mm-icon-img" style={{ marginRight: '16px' }} alt="" />
+                <img src="./assets/icons/carte_magnetique.png" className="mm-icon-img" style={{ marginRight: '16px' }} alt="" />
                 {h.name}
               </button>
             ))}
@@ -160,7 +160,7 @@ export default function MenuOverlay() {
         <div className="menu-panel custom-scrollbar" onClick={e => e.stopPropagation()} style={{ width: '380px', maxHeight: '80vh', overflowY: 'auto', padding: '16px' }}>
           <div className="menu-header" style={{ marginBottom: '16px' }}>
             <span className="menu-title">
-              <img src="/assets/icons/cherch_objet.png" className="mm-icon-img" alt="" /> GAME TIPS
+              <img src="./assets/icons/cherch_objet.png" className="mm-icon-img" alt="" /> GAME TIPS
             </span>
             <button className="menu-close" onClick={() => setSection('main')}>←</button>
           </div>
@@ -208,7 +208,7 @@ export default function MenuOverlay() {
         <div className="menu-panel custom-scrollbar" onClick={e => e.stopPropagation()} style={{ width: '380px', maxHeight: '80vh', overflowY: 'auto', padding: '16px' }}>
           <div className="menu-header" style={{ marginBottom: '16px' }}>
             <span className="menu-title">
-              <img src="/assets/icons/carte_magnetique.png" className="mm-icon-img" alt="" /> CONTACT
+              <img src="./assets/icons/carte_magnetique.png" className="mm-icon-img" alt="" /> CONTACT
             </span>
             <button className="menu-close" onClick={() => setSection('main')}>←</button>
           </div>
@@ -308,7 +308,7 @@ function ControlsMenu() {
   return (
     <div className="menu-content controls-menu">
       <div className="menu-subtitle">
-        <img src="/assets/icons/musique_gb.png" className="mm-icon-img" alt="" /> CONTROLS
+        <img src="./assets/icons/musique_gb.png" className="mm-icon-img" alt="" /> CONTROLS
       </div>
       <div className="controls-grid" style={{ padding: '10px', background: '#fff', border: '2px solid #506860', borderRadius: '8px', margin: '10px 0', fontSize: '10px' }}>
         {controls.map((c, i) => (
@@ -319,7 +319,7 @@ function ControlsMenu() {
         ))}
       </div>
       <div className="menu-subtitle" style={{marginTop: '16px'}}>
-        <img src="/assets/icons/lumiere_argile.png" className="mm-icon-img" alt="" /> TIPS
+        <img src="./assets/icons/lumiere_argile.png" className="mm-icon-img" alt="" /> TIPS
       </div>
       <div className="controls-tips" style={{ padding: '10px', background: '#fff', border: '2px solid #506860', borderRadius: '8px', margin: '10px 0', fontSize: '10px' }}>
         <ul style={{ margin: 0, paddingLeft: '20px', color: '#404040', lineHeight: '1.8' }}>
@@ -345,7 +345,7 @@ function OptionsMenu() {
   return (
     <div className="menu-content options-menu">
       <div className="menu-subtitle">
-        <img src="/assets/icons/cherch_objet.png" className="mm-icon-img" alt="" /> OPTIONS
+        <img src="./assets/icons/cherch_objet.png" className="mm-icon-img" alt="" /> OPTIONS
       </div>
       <div style={{ padding: '20px 10px', background: '#fff', border: '2px solid #506860', borderRadius: '8px', margin: '10px 0', fontSize: '10px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px' }}>
