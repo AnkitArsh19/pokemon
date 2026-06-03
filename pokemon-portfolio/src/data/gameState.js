@@ -32,13 +32,9 @@ class GameState {
         pikachu.isShiny = false;
         this.party.push(pikachu);
         this.pokedex.add(25);
-        this.hasSelectedStarter = true;
+        // Do NOT set this.hasSelectedStarter = true here; let the cinematic intro finish first!
         this.save();
       }
-    } else if (!this.hasSelectedStarter) {
-      // Party already exists (from old save) — just unlock encounters
-      this.hasSelectedStarter = true;
-      this.save();
     }
   }
 

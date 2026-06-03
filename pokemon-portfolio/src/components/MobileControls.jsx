@@ -30,21 +30,49 @@ export default function MobileControls() {
     return () => clearInterval(intervalRef.current);
   }, [isTouch]);
 
+  const simulateKey = (keyName, isDown) => {
+    const event = new KeyboardEvent(isDown ? 'keydown' : 'keyup', {
+      key: keyName,
+      code: keyName,
+      bubbles: true,
+      cancelable: true,
+    });
+    window.dispatchEvent(event);
+  };
+
   const startDirection = (dir) => {
     activeDir.current = dir;
     EventBus.emit('mobileDirection', dir);
+    
+    // Simulate DOM keyboard event for UI overlays
+    const keys = { up: 'ArrowUp', down: 'ArrowDown', left: 'ArrowLeft', right: 'ArrowRight' };
+    simulateKey(keys[dir], true);
   };
 
   const stopDirection = () => {
-    activeDir.current = null;
+    if (activeDir.current) {
+      const keys = { up: 'ArrowUp', down: 'ArrowDown', left: 'ArrowLeft', right: 'ArrowRight' };
+      simulateKey(keys[activeDir.current], false);
+      activeDir.current = null;
+    }
   };
 
-  const handleAButton = () => {
-    EventBus.emit('mobileInteract');
+  const handleAButton = (isDown) => {
+    if (isDown) {
+      EventBus.emit('mobileInteract');
+      simulateKey('Enter', true);
+    } else {
+      simulateKey('Enter', false);
+    }
   };
 
-  const handleBButton = () => {
-    EventBus.emit('showMenu', { section: 'main' });
+  const handleBButton = (isDown) => {
+    if (isDown) {
+      EventBus.emit('showMenu', { section: 'main' });
+      simulateKey('Escape', true);
+    } else {
+      simulateKey('Escape', false);
+    }
   };
 
   const openMenu = () => {
@@ -94,12 +122,14 @@ export default function MobileControls() {
           <div className="ab-container">
             <button
               className="ab-btn btn-a"
-              onTouchStart={(e) => { e.preventDefault(); handleAButton(); }}
+              onTouchStart={(e) => { e.preventDefault(); handleAButton(true); }}
+              onTouchEnd={(e) => { e.preventDefault(); handleAButton(false); }}
               aria-label="A - Interact"
             >A</button>
             <button
               className="ab-btn btn-b"
-              onTouchStart={(e) => { e.preventDefault(); handleBButton(); }}
+              onTouchStart={(e) => { e.preventDefault(); handleBButton(true); }}
+              onTouchEnd={(e) => { e.preventDefault(); handleBButton(false); }}
               aria-label="B - Menu"
             >B</button>
           </div>
