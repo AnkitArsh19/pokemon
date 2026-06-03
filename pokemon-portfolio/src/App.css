@@ -61,6 +61,10 @@
     image-rendering: crisp-edges;
 }
 
+.ui-layer > * {
+    pointer-events: auto;
+}
+
 /* ═══════════════════════════════════════════════
    DIALOGUE BOX — FireRed style
    ═══════════════════════════════════════════════ */

@@ -19,32 +19,33 @@ export default function MobileControls() {
     setIsTouch(touch);
   }, []);
 
-  // Continuously emit direction while D-pad is held
-  useEffect(() => {
-    if (!isTouch) return;
-    intervalRef.current = setInterval(() => {
-      if (activeDir.current) {
-        EventBus.emit('mobileDirection', activeDir.current);
-      }
-    }, 100);
-    return () => clearInterval(intervalRef.current);
-  }, [isTouch]);
 
   const simulateKey = (keyName, isDown) => {
+    const keyCodes = {
+      ArrowUp: 38,
+      ArrowDown: 40,
+      ArrowLeft: 37,
+      ArrowRight: 39,
+      Enter: 13,
+      Escape: 27
+    };
+
     const event = new KeyboardEvent(isDown ? 'keydown' : 'keyup', {
       key: keyName,
       code: keyName,
+      keyCode: keyCodes[keyName],
+      which: keyCodes[keyName],
       bubbles: true,
       cancelable: true,
     });
+    // Phaser strictly requires keyCode property for its Input plugin
+    Object.defineProperty(event, 'keyCode', { get: () => keyCodes[keyName] });
+    Object.defineProperty(event, 'which', { get: () => keyCodes[keyName] });
     window.dispatchEvent(event);
   };
 
   const startDirection = (dir) => {
     activeDir.current = dir;
-    EventBus.emit('mobileDirection', dir);
-    
-    // Simulate DOM keyboard event for UI overlays
     const keys = { up: 'ArrowUp', down: 'ArrowDown', left: 'ArrowLeft', right: 'ArrowRight' };
     simulateKey(keys[dir], true);
   };
