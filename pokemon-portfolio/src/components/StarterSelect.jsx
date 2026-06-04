@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import gameState from '../data/gameState';
 import EventBus from '../game/EventBus';
 import audioManager from '../data/audioManager';
 import SpriteSheetFrame from './SpriteSheetFrame';
+import { BOARD_TEXT_POOL } from '../data/boardTexts';
 import './LoadingStyles.css';
 
 const INTRO_BG_FRAMES = [
@@ -117,6 +118,20 @@ export default function StarterSelect() {
   const [battleNidorinoFrame, setBattleNidorinoFrame] = useState(0);
   const [battleGengarAttackFrame, setBattleGengarAttackFrame] = useState(0);
   const [battleNidorinoEffectFrame, setBattleNidorinoEffectFrame] = useState(-1);
+
+  const allFacts = useMemo(() => BOARD_TEXT_POOL.flat().map(t => t.replace(/\n/g, ' ')), []);
+  const [factIndex, setFactIndex] = useState(0);
+
+  useEffect(() => {
+    if (!visible || phase !== 'loading') return;
+    const handleKey = (e) => {
+      if (e.key === 'Enter') {
+        setFactIndex(prev => (prev + 1) % allFacts.length);
+      }
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [visible, phase, allFacts]);
 
   const enterMap = () => {
     audioManager.play('pallet_town', true);
@@ -311,8 +326,46 @@ export default function StarterSelect() {
       {phase === 'loading' && (
         <div className="loading-screen-wrap">
           {loadingPercentage < 100 ? (
-            <div className="loading-content">
+            <div className="loading-content" onClick={() => setFactIndex(prev => (prev + 1) % allFacts.length)}>
               <h2>LOADING...</h2>
+              <p style={{fontSize: '12px', color: '#666', marginBottom: '20px', textTransform: 'uppercase'}}>Please wait while resources load up</p>
+              
+              <div style={{
+                background: '#fff', 
+                border: '3px solid #506860', 
+                borderRadius: '8px', 
+                padding: '20px', 
+                margin: '20px auto',
+                maxWidth: '600px',
+                width: '90%',
+                minHeight: '80px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                cursor: 'pointer',
+                boxShadow: '4px 4px 0px rgba(0,0,0,0.2)'
+              }}>
+                <p style={{
+                  fontSize: '14px', 
+                  color: '#333', 
+                  lineHeight: '1.6', 
+                  margin: '0 0 16px 0',
+                  textAlign: 'center',
+                  fontFamily: '"Press Start 2P", monospace'
+                }}>
+                  {allFacts[factIndex]}
+                </p>
+                <p style={{
+                  fontSize: '10px', 
+                  color: '#999', 
+                  margin: 0,
+                  animation: 'pulse 1.5s infinite'
+                }}>
+                  Press ENTER or TOUCH for next fact
+                </p>
+              </div>
+
               <div className="loading-bar-border">
                 <div className="loading-bar-fill" style={{ width: `${loadingPercentage}%` }} />
               </div>

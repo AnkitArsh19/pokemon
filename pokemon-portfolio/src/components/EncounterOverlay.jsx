@@ -37,16 +37,19 @@ function rollWildPokemon(leadLevel = 5) {
   const shinyThreshold = 0.1; // 10% shiny rate
   const isShiny = Math.random() < shinyThreshold;
 
-  // Level curve: Skewed distribution favoring lower levels (averages around 25)
-  // There is a ~50% chance the level is between 1-20, but still a rare chance to hit 100
-  let level = Math.floor(Math.min(Math.random(), Math.random(), Math.random()) * 100) + 1;
+  // Level curve: Heavily skewed distribution favoring lower levels (averages around 16)
+  // There is a ~67% chance the level is between 1-20, but still a rare chance to hit 100
+  let level = Math.floor(Math.min(Math.random(), Math.random(), Math.random(), Math.random(), Math.random()) * 100) + 1;
   
   if (isLegendary || isShiny) {
-    // Skew significantly towards higher levels (roll 3 times, take highest)
-    const roll1 = Math.floor(Math.random() * 100) + 1;
-    const roll2 = Math.floor(Math.random() * 100) + 1;
-    const roll3 = Math.floor(Math.random() * 100) + 1;
-    level = Math.max(roll1, roll2, roll3);
+    // 10% chance to skip the high-level skew, allowing for rare low-level legendaries/shinies
+    if (Math.random() > 0.10) {
+      // Skew significantly towards higher levels (roll 3 times, take highest)
+      const roll1 = Math.floor(Math.random() * 100) + 1;
+      const roll2 = Math.floor(Math.random() * 100) + 1;
+      const roll3 = Math.floor(Math.random() * 100) + 1;
+      level = Math.max(roll1, roll2, roll3);
+    }
   }
 
   return { id, level, isShiny };
