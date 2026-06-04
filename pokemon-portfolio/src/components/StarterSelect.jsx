@@ -325,58 +325,66 @@ export default function StarterSelect() {
     <div className="starter-overlay">
       {phase === 'loading' && (
         <div className="loading-screen-wrap">
-          {loadingPercentage < 100 ? (
-            <div className="loading-content" onClick={() => setFactIndex(prev => (prev + 1) % allFacts.length)}>
+          <div className="loading-content" onClick={() => setFactIndex(prev => (prev + 1) % allFacts.length)}>
+            {loadingPercentage < 100 ? (
               <h2>LOADING...</h2>
-              <p style={{fontSize: '12px', color: '#666', marginBottom: '20px', textTransform: 'uppercase'}}>Please wait while resources load up</p>
-              
-              <div style={{
-                background: '#fff', 
-                border: '3px solid #506860', 
-                borderRadius: '8px', 
-                padding: '20px', 
-                margin: '20px auto',
-                maxWidth: '600px',
-                width: '90%',
-                minHeight: '80px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                cursor: 'pointer',
-                boxShadow: '4px 4px 0px rgba(0,0,0,0.2)'
+            ) : (
+              <h2 style={{color: '#58c870'}}>READY!</h2>
+            )}
+            <p style={{fontSize: '12px', color: '#666', marginBottom: '20px', textTransform: 'uppercase'}}>
+              {loadingPercentage < 100 ? "Please wait while resources load up" : "Click Start Game when you are ready"}
+            </p>
+            
+            <div style={{
+              background: '#fff', 
+              border: '3px solid #506860', 
+              borderRadius: '8px', 
+              padding: '20px', 
+              margin: '20px auto',
+              maxWidth: '600px',
+              width: '90%',
+              minHeight: '80px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              cursor: 'pointer',
+              boxShadow: '4px 4px 0px rgba(0,0,0,0.2)'
+            }}>
+              <p style={{
+                fontSize: '14px', 
+                color: '#333', 
+                lineHeight: '1.6', 
+                margin: '0 0 16px 0',
+                textAlign: 'center',
+                fontFamily: '"Press Start 2P", monospace'
               }}>
-                <p style={{
-                  fontSize: '14px', 
-                  color: '#333', 
-                  lineHeight: '1.6', 
-                  margin: '0 0 16px 0',
-                  textAlign: 'center',
-                  fontFamily: '"Press Start 2P", monospace'
-                }}>
-                  {allFacts[factIndex]}
-                </p>
-                <p style={{
-                  fontSize: '10px', 
-                  color: '#999', 
-                  margin: 0,
-                  animation: 'pulse 1.5s infinite'
-                }}>
-                  Press ENTER or TOUCH for next fact
-                </p>
-              </div>
+                {allFacts[factIndex]}
+              </p>
+              <p style={{
+                fontSize: '10px', 
+                color: '#999', 
+                margin: 0,
+                animation: 'pulse 1.5s infinite'
+              }}>
+                Press ENTER or TOUCH for next fact
+              </p>
+            </div>
 
-              <div className="loading-bar-border">
-                <div className="loading-bar-fill" style={{ width: `${loadingPercentage}%` }} />
+            {loadingPercentage < 100 ? (
+              <>
+                <div className="loading-bar-border">
+                  <div className="loading-bar-fill" style={{ width: `${loadingPercentage}%` }} />
+                </div>
+                <p>{loadingPercentage}%</p>
+              </>
+            ) : (
+              <div className="start-content" style={{marginTop: '20px'}} onClick={e => e.stopPropagation()}>
+                <button className="start-button" onClick={handleStartGame}>START GAME</button>
+                <p className="desktop-hint">Desktop is recommended for the best experience.</p>
               </div>
-              <p>{loadingPercentage}%</p>
-            </div>
-          ) : (
-            <div className="start-content">
-              <button className="start-button" onClick={handleStartGame}>START GAME</button>
-              <p className="desktop-hint">Desktop is recommended for the best experience.</p>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       )}
 
