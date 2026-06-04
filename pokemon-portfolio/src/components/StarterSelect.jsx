@@ -119,7 +119,14 @@ export default function StarterSelect() {
   const [battleGengarAttackFrame, setBattleGengarAttackFrame] = useState(0);
   const [battleNidorinoEffectFrame, setBattleNidorinoEffectFrame] = useState(-1);
 
-  const allFacts = useMemo(() => BOARD_TEXT_POOL.flat().map(t => t.replace(/\n/g, ' ')), []);
+  const allFacts = useMemo(() => {
+    const facts = BOARD_TEXT_POOL.map(factArray => factArray.join('\n\n'));
+    for (let i = facts.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [facts[i], facts[j]] = [facts[j], facts[i]];
+    }
+    return facts;
+  }, []);
   const [factIndex, setFactIndex] = useState(0);
 
   useEffect(() => {
@@ -352,12 +359,13 @@ export default function StarterSelect() {
               boxShadow: '4px 4px 0px rgba(0,0,0,0.2)'
             }}>
               <p style={{
-                fontSize: '14px', 
+                fontSize: '11px', 
                 color: '#333', 
                 lineHeight: '1.6', 
                 margin: '0 0 16px 0',
                 textAlign: 'center',
-                fontFamily: '"Press Start 2P", monospace'
+                fontFamily: '"Press Start 2P", monospace',
+                whiteSpace: 'pre-wrap'
               }}>
                 {allFacts[factIndex]}
               </p>
