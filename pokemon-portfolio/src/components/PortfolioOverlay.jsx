@@ -58,7 +58,7 @@ const PORTFOLIO_DATA = {
     },
     {
       title: 'YAPLAB',
-      content: 'All message content is encrypted at rest with AES-256.<br/><br/>CI/CD pipeline runs on GitHub Actions and deploys to Azure App Service.<br/><br/>Stack: Spring Boot 3.4, React 19, WebSocket/STOMP, MySQL, Docker, Azure, GitHub Actions.<br/><br/>GitHub: <a href="https://github.com/AnkitArsh19/yaplab-app" target="_blank" rel="noopener noreferrer">github.com/AnkitArsh19/yaplab-app</a> Live: <a href="https://yaplab.social" target="_blank" rel="noopener noreferrer">yaplab.social</a>'
+      content: 'All message content is encrypted at rest with AES-256.<br/><br/>CI/CD pipeline runs on GitHub Actions and deploys to Azure App Service.<br/><br/>Stack: Spring Boot 3.4, React 19, WebSocket/STOMP, MySQL, Docker, Azure, GitHub Actions.<br/><br/>GitHub: <a href="https://github.com/AnkitArsh19/yaplab-app" target="_blank" rel="noopener noreferrer">github.com/AnkitArsh19/yaplab-app</a> Live: <a href="https://yaplab.ankitarsh.me" target="_blank" rel="noopener noreferrer">yaplab.ankitarsh.me</a>'
     }
   ],
   house_5: [
